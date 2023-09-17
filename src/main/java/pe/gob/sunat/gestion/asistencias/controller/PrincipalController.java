@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
@@ -37,20 +38,62 @@ public class PrincipalController {
     }
     
     @FXML
-    private void onClickVistaTrabajador(){
-        System.out.println("onClickVistaTrabajador()");
+    private void onClickVistaPropietario(){
+        System.out.println("onClickVistaPropietario()");
         try {
-            FXMLArchivo<GestionTrabajadoresController> fxTrabajador = new FXMLArchivo<>("VistaGestionTrabajadores");
-            AnchorPane.setBottomAnchor(fxTrabajador.getRoot(), 0.0);
-            AnchorPane.setTopAnchor(fxTrabajador.getRoot(), 0.0);
-            AnchorPane.setLeftAnchor(fxTrabajador.getRoot(), 0.0);
-            AnchorPane.setRightAnchor(fxTrabajador.getRoot(), 0.0);
-        
+            FXMLArchivo<GestionPropietariosController> fxPropietario = new FXMLArchivo<>("VistaGestionPropietarios");
+            extenderPanel(fxPropietario.getRoot());
             panelContenido.getChildren().clear();
-            panelContenido.getChildren().add(fxTrabajador.getRoot());
+            panelContenido.getChildren().add(fxPropietario.getRoot());
         } catch (IOException ex) {
             Logger.getLogger(PrincipalController.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    @FXML
+    private void onClickVistaEventos(){
+        System.out.println("onClickVistaEventos()");
+        try {
+            FXMLArchivo<GestionEventosController> fxEventos = new FXMLArchivo<>("VistaGestionEventos");
+            extenderPanel(fxEventos.getRoot());
+            panelContenido.getChildren().clear();
+            panelContenido.getChildren().add(fxEventos.getRoot());
+        } catch (IOException ex) {
+            Logger.getLogger(PrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    @FXML
+    private void onClickVistaDashBoard(){
+        System.out.println("onClickVistaDashBoard()");
+        try {
+            FXMLArchivo<DashboardController> fxDashBoard = new FXMLArchivo<>("VistaDashboard");
+            extenderPanel(fxDashBoard.getRoot());
+            panelContenido.getChildren().clear();
+            panelContenido.getChildren().add(fxDashBoard.getRoot());
+        } catch (IOException ex) {
+            Logger.getLogger(PrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+     @FXML
+    private void onClickVistaReporteAsistencia(){
+        System.out.println("onClickVistaReporteAsistencia()");
+        try {
+            FXMLArchivo<GestionPropietariosController> fxRepAsistencia = new FXMLArchivo<>("VistaReporteAsistencia");
+            extenderPanel(fxRepAsistencia.getRoot());
+            panelContenido.getChildren().clear();
+            panelContenido.getChildren().add(fxRepAsistencia.getRoot());
+        } catch (IOException ex) {
+            Logger.getLogger(PrincipalController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void extenderPanel(Parent root){
+        AnchorPane.setBottomAnchor(root, 0.0);
+        AnchorPane.setTopAnchor(root, 0.0);
+        AnchorPane.setLeftAnchor(root, 0.0);
+        AnchorPane.setRightAnchor(root, 0.0);
     }
     
     void init(Stage stageVentanaLogin,Stage stageVentanaPrincipal, LoginController loginController, Usuario usuario) {
@@ -58,7 +101,7 @@ public class PrincipalController {
         this.stageVentanaLogin = stageVentanaLogin;
         this.stageVentanaPrincipal = stageVentanaPrincipal;
         this.usuario = usuario;
-        lblUsuario.setText("Bienvenido: "+usuario.getNombre());
+        lblUsuario.setText("Bienvenido: "+usuario.getNombres());
     }
     
 }

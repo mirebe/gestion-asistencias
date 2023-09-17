@@ -8,6 +8,6 @@ package pe.gob.sunat.gestion.asistencias.controller;
  *
  * @author mireb
  */
-public class RegistroAreasController {
+public class GestionEventosController {
     
 }

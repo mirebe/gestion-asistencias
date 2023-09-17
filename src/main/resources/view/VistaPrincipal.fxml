@@ -176,12 +176,12 @@
                                                    <children>
                                                       <VBox VBox.vgrow="ALWAYS">
                                                          <children>
-                                                            <Label fx:id="lblConfiguracion1" onMouseReleased="#onClickVistaTrabajador" prefWidth="200.0" styleClass="item-fx" text="Trabajadores" VBox.vgrow="ALWAYS">
+                                                            <Label fx:id="lblConfiguracion1" onMouseReleased="#onClickVistaPropietario" prefWidth="200.0" styleClass="item-fx" text="Propietarios" VBox.vgrow="ALWAYS">
                                                                <font>
                                                                   <Font size="16.0" />
                                                                </font>
                                                                <graphic>
-                                                                  <FontAwesomeIcon iconName="COG">
+                                                                  <FontAwesomeIcon iconName="USER">
                                                                      <font>
                                                                         <Font name="System Bold" size="15.0" />
                                                                      </font>
@@ -192,12 +192,12 @@
                                                       </VBox>
                                                       <VBox layoutX="22.0" layoutY="22.0">
                                                          <children>
-                                                            <Label fx:id="lblConfiguracion12" prefWidth="200.0" styleClass="item-fx" text="Horarios" VBox.vgrow="ALWAYS">
+                                                            <Label fx:id="lblConfiguracion12" onMouseReleased="#onClickVistaEventos" prefWidth="200.0" styleClass="item-fx" text="Eventos" VBox.vgrow="ALWAYS">
                                                                <font>
                                                                   <Font size="16.0" />
                                                                </font>
                                                                <graphic>
-                                                                  <FontAwesomeIcon iconName="COG">
+                                                                  <FontAwesomeIcon iconName="CALENDAR" text="">
                                                                      <font>
                                                                         <Font name="System Bold" size="15.0" />
                                                                      </font>
@@ -225,12 +225,12 @@
                                                          <children>
                                                             <VBox VBox.vgrow="ALWAYS">
                                                                <children>
-                                                                  <Label fx:id="lblConfiguracion11" prefWidth="200.0" styleClass="item-fx" text="Reporte de Asistencia" VBox.vgrow="ALWAYS">
+                                                                  <Label fx:id="lblConfiguracion11" onMouseReleased="#onClickVistaReporteAsistencia" prefWidth="200.0" styleClass="item-fx" text="Reporte de Asistencia" VBox.vgrow="ALWAYS">
                                                                      <font>
                                                                         <Font size="16.0" />
                                                                      </font>
                                                                      <graphic>
-                                                                        <FontAwesomeIcon iconName="COG">
+                                                                        <FontAwesomeIcon glyphStyleClass="" iconName="FILE_TEXT" text="">
                                                                            <font>
                                                                               <Font name="System Bold" size="15.0" />
                                                                            </font>
@@ -241,12 +241,12 @@
                                                             </VBox>
                                                             <VBox layoutX="22.0" layoutY="22.0">
                                                                <children>
-                                                                  <Label fx:id="lblConfiguracion121" prefWidth="200.0" styleClass="item-fx" text="DashBoard" VBox.vgrow="ALWAYS">
+                                                                  <Label fx:id="lblConfiguracion121" onMouseReleased="#onClickVistaDashBoard" prefWidth="200.0" styleClass="item-fx" text="DashBoard" VBox.vgrow="ALWAYS">
                                                                      <font>
                                                                         <Font size="16.0" />
                                                                      </font>
                                                                      <graphic>
-                                                                        <FontAwesomeIcon iconName="COG">
+                                                                        <FontAwesomeIcon iconName="FILE_TEXT">
                                                                            <font>
                                                                               <Font name="System Bold" size="15.0" />
                                                                            </font>

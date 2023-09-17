@@ -17,7 +17,7 @@ import pe.gob.sunat.gestion.asistencias.model.dao.UsuarioDao;
 public class UsuarioDaoImpl implements UsuarioDao{
     
     private Connection cn;
-    private static final String QUERY_FIND_BY_ID ="SELECT * FROM bdasistencia.usuarios WHERE cod_usu=? and clave=? ";
+    private static final String QUERY_FIND_BY_ID ="SELECT * FROM usuario WHERE usuario=? and contrasenia=? ";
 
     public UsuarioDaoImpl(Connection cn) {
         this.cn = cn;
@@ -33,9 +33,9 @@ public class UsuarioDaoImpl implements UsuarioDao{
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
             usuario = new Usuario();
-            usuario.setCodUsu(rs.getString("cod_usu"));
-            usuario.setNombre("nombre");
-            usuario.setPerfilUsu("perfil_usu");
+            usuario.setIdPropietario(rs.getInt("idUsuario"));
+            usuario.setNombres("nombres");
+            usuario.setUsuario("usuario");
         }
         rs.close();
         ps.close();

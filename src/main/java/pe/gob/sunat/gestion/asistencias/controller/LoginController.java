@@ -70,7 +70,7 @@ public class LoginController implements Initializable{
     @FXML
     private void onAction_botonIngresar(){
         Usuario usuario = new Usuario();
-        usuario.setCodUsu(txtUsuario.getText());
+        usuario.setUsuario(txtUsuario.getText());
         usuario.setClave(txtPassword.getText());
         
         System.err.println("--->"+cboTipoIngreso.getValue());
