@@ -95,7 +95,8 @@ public class LoginController implements Initializable{
                 mostrarMensaje(result.get("MSG").toString(), result.get("CAMPO").toString(), IconosAwesome.ERROR);
             }
         } catch (Exception ex) {
-            Logger.getLogger(LoginController.class.getName()).log(Level.SEVERE, null, ex);
+            ex.printStackTrace();
+            mostrarMensaje("Ocurrio error ..", "Mensaje Error", IconosAwesome.ERROR);
         }
         
     }
@@ -145,7 +146,7 @@ public class LoginController implements Initializable{
     private void showVentanaRegistroMarcador() {
         Platform.runLater(() -> {
             try {
-                FXMLArchivo<RegistroMarcacionController> fxmlRegistroMarcacion = new FXMLArchivo<>("VistaRegistroMarcador");
+                FXMLArchivo<RegistroMarcadorController> fxmlRegistroMarcacion = new FXMLArchivo<>("VistaRegistroMarcador");
                 Scene scene = new Scene(fxmlRegistroMarcacion.getRoot());
                 Stage stageVentanaRegistroMarcacion = new Stage();
                 stageVentanaRegistroMarcacion.setScene(scene);

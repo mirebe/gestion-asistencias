@@ -1,6 +1,6 @@
+pe\gob\sunat\gestion\asistencias\controller\LoginController.class
 pe\gob\sunat\gestion\asistencias\App.class
 module-info.class
 pe\gob\sunat\gestion\asistencias\controller\ReporteAsistenciasController.class
 pe\gob\sunat\gestion\asistencias\controller\DashboardController.class
-pe\gob\sunat\gestion\asistencias\controller\LoginController.class
 pe\gob\sunat\gestion\asistencias\controller\PrincipalController.class

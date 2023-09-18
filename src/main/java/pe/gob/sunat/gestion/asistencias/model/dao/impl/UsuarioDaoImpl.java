@@ -16,7 +16,7 @@ import pe.gob.sunat.gestion.asistencias.model.dao.UsuarioDao;
  */
 public class UsuarioDaoImpl implements UsuarioDao{
     
-    private Connection cn;
+    private final Connection cn;
     private static final String QUERY_FIND_BY_ID ="SELECT * FROM usuario WHERE usuario=? and contrasenia=? ";
 
     public UsuarioDaoImpl(Connection cn) {

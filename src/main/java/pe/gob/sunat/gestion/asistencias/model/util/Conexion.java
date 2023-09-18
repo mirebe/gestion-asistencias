@@ -9,27 +9,31 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 /**
- *
+ *Instance una conexion de la base datos usando elpatron singleton
  * @author mireb
  */
 public class Conexion {
-
-    private static final String HOST = "127.0.0.1";
-    private static final int PORT = 3306;
-    private static final String DB_NAME = "asistencia_db";
-    private static final String USERNAME = "root";
-    private static final String PASSWORD = "root";
-    private static Connection connection;
-
-    public static Connection getConnect() {
-        try {
+    
+    private String HOST = "127.0.0.1";
+    private int PORT = 3306;
+    private String DB_NAME = "asistencia_db";
+    private String USERNAME = "root";
+    private String PASSWORD = "root";
+    private static Connection connection = null;
+    
+    private Conexion() {
+        try{
             Class.forName("com.mysql.cj.jdbc.Driver");
             connection = DriverManager.getConnection(String.format("jdbc:mysql://%s:%d/%s", HOST, PORT, DB_NAME), USERNAME, PASSWORD);
-        } catch (SQLException ex) {
-            System.err.println("Ocurrio un error "+ex.getMessage());
-        }catch (ClassNotFoundException ex) {
-            System.err.println("Ocurrio un error "+ex.getMessage());
+        }catch(ClassNotFoundException | SQLException e){
+            e.printStackTrace();
         }
+    }
+
+    public static Connection getConnect() {
+        if(connection == null){
+            new Conexion();
+        }   
         return connection;
     }
 
