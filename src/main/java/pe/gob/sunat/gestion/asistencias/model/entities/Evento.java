@@ -78,6 +78,11 @@ public class Evento {
     public void setEstado(Integer estado) {
         this.estado = estado;
     }
+
+    @Override
+    public String toString() {
+        return this.descripcion;
+    }
     
     
 }

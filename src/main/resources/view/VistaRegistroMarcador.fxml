@@ -152,7 +152,7 @@
             </HBox>
             <VBox alignment="CENTER" prefHeight="200.0">
                <children>
-                  <Button fx:id="btnMarcar" mnemonicParsing="false" prefWidth="300.0" text="Marcar Entrada">
+                  <Button fx:id="btnMarcar" mnemonicParsing="false" onAction="#onClick_marcarIngreso" prefWidth="300.0" text="Marcar Entrada">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
