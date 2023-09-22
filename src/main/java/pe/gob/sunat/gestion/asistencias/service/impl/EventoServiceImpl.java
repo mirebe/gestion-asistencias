@@ -4,6 +4,7 @@
  */
 package pe.gob.sunat.gestion.asistencias.service.impl;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import pe.gob.sunat.gestion.asistencias.model.dao.EventoDao;
@@ -16,16 +17,56 @@ import pe.gob.sunat.gestion.asistencias.service.EventoService;
  *
  * @author mireb
  */
-public class EventoServiceImpl implements EventoService{
+public class EventoServiceImpl implements EventoService {
+
     private EventoDao eventoDao;
 
     public EventoServiceImpl() {
         eventoDao = new EventoDaoImpl(Conexion.getConnect());
     }
-    
+
     @Override
-    public List<Evento> listarEventosActivos() throws Exception{
+    public List<Evento> listarEventosActivos() throws Exception {
         List<Evento> eventos = eventoDao.listarEventosActivos();
+        return eventos;
+    }
+
+    @Override
+    public void guardarEvento(Evento evento) throws Exception {
+        eventoDao.guardarEvento(evento);
+    }
+
+    @Override
+    public List<Evento> listarEvento() throws Exception {
+        List<Evento> eventos = eventoDao.listarEvento();
+        return eventos;
+    }
+
+    @Override
+    public Evento buscarEventoPorId(Long idEvento) throws Exception {
+        List<Evento> eventos = eventoDao.listarEvento();
+        return eventos.get(0);
+    }
+
+    @Override
+    public void actualizarEvento(Evento evento) throws Exception {
+        eventoDao.actualizarEvento(evento);
+    }
+
+    @Override
+    public void desactivarEvento(Long idEvento) throws Exception {
+        eventoDao.desactivarEvento(idEvento);
+    }
+
+    @Override
+    public List<Evento> buscarEventoPorFecha(LocalDate fechaEvento) throws Exception {
+        List<Evento> eventos = eventoDao.buscarEventoPorFecha(fechaEvento);
+        return eventos;
+    }
+
+    @Override
+    public List<Evento> buscarEventoPorAnio(int anioEvento) throws Exception {
+        List<Evento> eventos = eventoDao.buscarEventoPorAnio(anioEvento);
         return eventos;
     }
 }

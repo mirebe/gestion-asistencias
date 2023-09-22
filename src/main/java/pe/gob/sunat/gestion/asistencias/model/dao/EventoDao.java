@@ -1,9 +1,6 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package pe.gob.sunat.gestion.asistencias.model.dao;
 
+import java.time.LocalDate;
 import java.util.List;
 import pe.gob.sunat.gestion.asistencias.model.entities.Evento;
 
@@ -12,15 +9,21 @@ import pe.gob.sunat.gestion.asistencias.model.entities.Evento;
  * @author mireb
  */
 public interface EventoDao {
+
     public List<Evento> listarEventosActivos() throws Exception;
-    
-    void guardarEvento(Evento evento);
 
-    List<Evento> listarEvento();
+    void guardarEvento(Evento evento) throws Exception;
 
-    Evento buscarEventoPorId(Long idEvento);
+    List<Evento> listarEvento() throws Exception;
 
-    void actualizarEvento(Evento evento);
+    Evento buscarEventoPorId(Long idEvento) throws Exception;
 
-    void eliminarEvento(Long idEvento);
+    void actualizarEvento(Evento evento) throws Exception;
+
+    void desactivarEvento(Long idEvento) throws Exception;
+
+    List<Evento> buscarEventoPorFecha(LocalDate fechaEvento) throws Exception;
+
+    List<Evento> buscarEventoPorAnio(int anioEvento) throws Exception;
+
 }
