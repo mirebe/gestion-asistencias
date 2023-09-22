@@ -49,7 +49,7 @@ public class EventoDaoImpl implements EventoDao{
         PreparedStatement pstmt = null;
         try {
 
-            String sql = "Insert into Evento(descripcion, fechaEvento, horaEvento, estado, anio) VALUES(?,?,?,?,?)";
+            String sql = "Insert into Evento(descripcion, fechaEvento, horaEvento, estado, anioEvento) VALUES(?,?,?,?,?)";
             pstmt = cn.prepareStatement(sql);
             pstmt.setString(1, evento.getDescripcion());
             pstmt.setDate(2, java.sql.Date.valueOf(evento.getFechaEvento()));
