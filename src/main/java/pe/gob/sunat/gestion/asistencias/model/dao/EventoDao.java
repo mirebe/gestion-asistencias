@@ -13,4 +13,14 @@ import pe.gob.sunat.gestion.asistencias.model.entities.Evento;
  */
 public interface EventoDao {
     public List<Evento> listarEventosActivos() throws Exception;
+    
+    void guardarEvento(Evento evento);
+
+    List<Evento> listarEvento();
+
+    Evento buscarEventoPorId(Long idEvento);
+
+    void actualizarEvento(Evento evento);
+
+    void eliminarEvento(Long idEvento);
 }

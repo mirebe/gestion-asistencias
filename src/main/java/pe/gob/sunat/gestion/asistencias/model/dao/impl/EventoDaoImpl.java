@@ -7,6 +7,8 @@ package pe.gob.sunat.gestion.asistencias.model.dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import pe.gob.sunat.gestion.asistencias.model.dao.EventoDao;
@@ -42,5 +44,54 @@ public class EventoDaoImpl implements EventoDao{
         
         return lista;
     }
-    
+    @Override
+    public void guardarEvento(Evento evento) {
+        PreparedStatement pstmt = null;
+        try {
+
+            String sql = "Insert into Evento(descripcion, fechaEvento, horaEvento, estado, anio) VALUES(?,?,?,?,?)";
+            pstmt = cn.prepareStatement(sql);
+            pstmt.setString(1, evento.getDescripcion());
+            pstmt.setDate(2, java.sql.Date.valueOf(evento.getFechaEvento()));
+            pstmt.setTimestamp(3, java.sql.Timestamp.valueOf(evento.getHoraEvento()));
+            pstmt.setInt(4, evento.getEstado());
+            pstmt.setInt(5, evento.getAnioEvento());
+
+            pstmt.executeUpdate();
+
+        } catch (SQLException se) {
+            System.out.println(se.getMessage());
+        } finally {
+            try {
+                if (cn != null) {
+                    cn.close();
+                }
+                if (pstmt != null) {
+                    pstmt.close();
+                }
+            } catch (SQLException se) {
+                System.out.println(se.getMessage());
+            }
+        }
+    }
+
+    @Override
+    public List<Evento> listarEvento() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public Evento buscarEventoPorId(Long idEvento) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void actualizarEvento(Evento evento) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public void eliminarEvento(Long idEvento) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
 }
