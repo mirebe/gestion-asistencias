@@ -38,7 +38,7 @@ public class LoginServiceImpl implements LoginService{
 	for (Integer regla : reglas) {
             switch (regla) {
                 case 1://Validaciones para el usuario.
-                    if (usuario.getCodUsu().trim().length() == 0) {
+                    if (usuario.getUsuario().trim().length() == 0) {
 			validacion.put("STATUS", false);
 			validacion.put("COD", "L001");
 			validacion.put("CAMPO", "Usuario");
@@ -56,7 +56,7 @@ public class LoginServiceImpl implements LoginService{
                     }
                     break;
                 case 3://valida base datos
-                    Usuario us = usuarioDao.findById(usuario.getCodUsu(),usuario.getClave());
+                    Usuario us = usuarioDao.findById(usuario.getUsuario(),usuario.getClave());
                     if (us == null) {
 			validacion.put("STATUS", false);
 			validacion.put("COD", "L002");

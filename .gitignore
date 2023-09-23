@@ -1,1 +1,5 @@
-/target/
+# Maven: Archivos compilados
+target/
+
+# Netbeans: Archivos de configuracion
+nbactions.xml

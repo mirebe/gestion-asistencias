@@ -10,7 +10,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pe.gob.sunat.gestion.asistencias.controller.RegistroMarcacionController">
+<AnchorPane id="AnchorPane" fx:id="contentMain" prefHeight="400.0" prefWidth="600.0" stylesheets="@../css/login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pe.gob.sunat.gestion.asistencias.controller.RegistroMarcadorController">
    <children>
       <VBox layoutX="18.0" layoutY="18.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
@@ -50,7 +50,7 @@
             </HBox>
             <VBox alignment="CENTER">
                <children>
-                  <Label fx:id="lblReloj" alignment="CENTER" text="08:30 AM" textFill="#252297">
+                  <Label fx:id="lblReloj" alignment="CENTER" textFill="#252297">
                      <font>
                         <Font name="System Bold" size="36.0" />
                      </font>
@@ -64,7 +64,7 @@
                <children>
                   <VBox fx:id="contenedorUsuario" maxHeight="59.0" minHeight="59.0" prefHeight="59.0" spacing="5.0" styleClass="input-group-fx">
                      <children>
-                        <Label fx:id="lblLogginUsuario" maxHeight="1.7976931348623157E308" maxWidth="150.0" minWidth="150.0" text="ID Trabajador">
+                        <Label fx:id="lblLogginUsuario" maxHeight="1.7976931348623157E308" maxWidth="150.0" minWidth="150.0" text="DNI">
                            <font>
                               <Font name="System Bold" size="12.0" />
                            </font>
@@ -73,7 +73,7 @@
                               <String fx:value="tam_12px" />
                            </styleClass>
                         </Label>
-                        <TextField fx:id="txtUsuario" alignment="BOTTOM_LEFT" promptText="Ingrese Usuario" styleClass="form-control" text="">
+                        <TextField fx:id="txtDni" alignment="BOTTOM_LEFT" promptText="Ingrese su numero DNI" styleClass="form-control" text="">
                            <font>
                               <Font size="15.0" />
                            </font>
@@ -103,7 +103,7 @@
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                      </padding>
                      <children>
-                        <Button fx:id="btnBuscar" mnemonicParsing="false" text="Buscar">
+                        <Button fx:id="btnBuscar" mnemonicParsing="false" onAction="#onClick_buscarPropietario" text="Buscar">
                            <styleClass>
                               <String fx:value="btn-fx" />
                               <String fx:value="btn-fx-success" />
@@ -135,18 +135,15 @@
                           <rowConstraints>
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label text="Horario Trabajo :" textFill="#f82323">
+                              <Label text="Evento:" textFill="#f82323">
                                  <font>
                                     <Font name="System Bold" size="15.0" />
                                  </font></Label>
-                              <Label text="DNI :" GridPane.rowIndex="1" />
-                              <Label text="Nombres: " GridPane.rowIndex="2" />
-                              <Label fx:id="lblHoraTrabajo" GridPane.columnIndex="1" />
-                              <Label fx:id="lblDocumento" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                              <Label fx:id="lblNombres" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                              <Label text="Nombres: " GridPane.rowIndex="1" />
+                              <Label fx:id="lblNombres" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <ComboBox fx:id="cboEvento" prefHeight="31.0" prefWidth="304.0" GridPane.columnIndex="1" />
                            </children>
                         </GridPane>
                      </children>
@@ -155,7 +152,7 @@
             </HBox>
             <VBox alignment="CENTER" prefHeight="200.0">
                <children>
-                  <Button fx:id="btnMarcar" mnemonicParsing="false" prefWidth="300.0" text="Marcar Entrada">
+                  <Button fx:id="btnMarcar" disable="true" mnemonicParsing="false" onAction="#onClick_marcarIngreso" prefWidth="300.0" text="Marcar Entrada">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
