@@ -6,83 +6,168 @@ package pe.gob.sunat.gestion.asistencias.model.entities;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import javafx.beans.property.ObjectProperty;
+import javafx.beans.property.SimpleObjectProperty;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.property.StringProperty;
 
 /**
  *
  * @author mireb
  */
 public class Evento {
-    private Integer idEvento;
-    private String descripcion;
-    private LocalDate fechaEvento;
-    private LocalDateTime horaEvento;
-    private Integer anioEvento;
-    private Integer estado;
+    private ObjectProperty<Long> idEvento;
+    private StringProperty descripcion;
+    private ObjectProperty<LocalDate> fechaEvento;
+    private ObjectProperty<LocalDateTime> horaEvento;
+    private ObjectProperty<Integer> anioEvento;
+    private ObjectProperty<Integer> estado;
 
     public Evento() {
+        this.idEvento = new SimpleObjectProperty<>(0L);
+        this.descripcion = new SimpleStringProperty("");
+        this.fechaEvento = new SimpleObjectProperty<>(LocalDate.now());
+        this.horaEvento = new SimpleObjectProperty<>(LocalDateTime.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth(), 0, 0));
+        this.anioEvento = new SimpleObjectProperty<>(0);
+        this.estado = new SimpleObjectProperty<>(0);
+        
+    }
+    
+    public Evento(Long idEvento, String descripcion, LocalDate fechaEvento, LocalDateTime horaEvento, Integer anioEvento, Integer estado) {
+        this.idEvento = new SimpleObjectProperty<>(idEvento);
+        this.descripcion = new SimpleStringProperty(descripcion);
+        this.fechaEvento = new SimpleObjectProperty<>(fechaEvento);
+        this.horaEvento = new SimpleObjectProperty<>(horaEvento);
+        this.anioEvento = new SimpleObjectProperty<>(anioEvento);
+        this.estado = new SimpleObjectProperty<>(estado);
+    }
+    
+    public Evento(Long idEvento, String descripcion) {
+        this.idEvento = new SimpleObjectProperty<>(idEvento);
+        this.descripcion = new SimpleStringProperty(descripcion);
     }
 
-    public Evento(Integer idEvento, String descripcion, LocalDate fechaEvento, LocalDateTime horaEvento, Integer anioEvento, Integer estado) {
-        this.idEvento = idEvento;
-        this.descripcion = descripcion;
-        this.fechaEvento = fechaEvento;
-        this.horaEvento = horaEvento;
-        this.anioEvento = anioEvento;
-        this.estado = estado;
-    }
-
-    public Integer getIdEvento() {
+    /**
+     * @return the idEvento
+     */
+    public ObjectProperty<Long> getIdEvento1() {
         return idEvento;
     }
 
-    public void setIdEvento(Integer idEvento) {
+    /**
+     * @param idEvento the idEvento to set
+     */
+    public void setIdEvento1(ObjectProperty<Long> idEvento) {
         this.idEvento = idEvento;
     }
 
-    public String getDescripcion() {
+    /**
+     * @return the descripcion
+     */
+    public StringProperty getDescripcion1() {
         return descripcion;
     }
 
-    public void setDescripcion(String descripcion) {
+    /**
+     * @param descripcion the descripcion to set
+     */
+    public void setDescripcion1(StringProperty descripcion) {
         this.descripcion = descripcion;
     }
 
-    public LocalDate getFechaEvento() {
+    /**
+     * @return the fechaEvento
+     */
+    public ObjectProperty<LocalDate> getFechaEvento1() {
         return fechaEvento;
     }
 
-    public void setFechaEvento(LocalDate fechaEvento) {
+    /**
+     * @param fechaEvento the fechaEvento to set
+     */
+    public void setFechaEvento1(ObjectProperty<LocalDate> fechaEvento) {
         this.fechaEvento = fechaEvento;
     }
 
-    public LocalDateTime getHoraEvento() {
+    /**
+     * @return the horaEvento
+     */
+    public ObjectProperty<LocalDateTime> getHoraEvento1() {
         return horaEvento;
     }
 
-    public void setHoraEvento(LocalDateTime horaEvento) {
+    /**
+     * @param horaEvento the horaEvento to set
+     */
+    public void setHoraEvento1(ObjectProperty<LocalDateTime> horaEvento) {
         this.horaEvento = horaEvento;
     }
 
-    public Integer getAnioEvento() {
+    /**
+     * @return the anioEvento
+     */
+    public ObjectProperty<Integer> getAnioEvento1() {
         return anioEvento;
     }
 
-    public void setAnioEvento(Integer anioEvento) {
+    /**
+     * @param anioEvento the anioEvento to set
+     */
+    public void setAnioEvento1(ObjectProperty<Integer> anioEvento) {
         this.anioEvento = anioEvento;
     }
 
-    public Integer getEstado() {
+    /**
+     * @return the estado
+     */
+    public ObjectProperty<Integer> getEstado1() {
         return estado;
     }
 
-    public void setEstado(Integer estado) {
+    /**
+     * @param estado the estado to set
+     */
+    public void setEstado1(ObjectProperty<Integer> estado) {
         this.estado = estado;
     }
 
-    @Override
-    public String toString() {
-        return this.descripcion;
+
+    public Long getIdEvento() {
+        return idEvento.get();
     }
-    
+    public void setIdEvento(Long idEvento) {
+        this.idEvento.set(idEvento);
+    }
+    public String getDescripcion() {
+        return descripcion.get();
+    }
+    public void setDescripcion(String descripcion) {
+        this.descripcion.set(descripcion);
+    }
+    public LocalDate getFechaEvento() {
+        return fechaEvento.get();
+    }
+    public void setFechaEvento(LocalDate fechaEvento) {
+        this.fechaEvento.set(fechaEvento);
+    }
+    public LocalDateTime getHoraEvento() {
+        return horaEvento.get();
+    }
+    public void setHoraEvento(LocalDateTime horaEvento) {
+        this.horaEvento.set(horaEvento);
+    }
+    public Integer getAnioEvento() {
+        return anioEvento.get();
+    }
+
+    public void setAnioEvento(Integer anioEvento) {
+        this.anioEvento.set(anioEvento);
+    }
+    public Integer getEstado() {
+        return estado.get();
+    }
+    public void setEstado1(Integer estado) {
+        this.estado.set(estado);
+    }
     
 }

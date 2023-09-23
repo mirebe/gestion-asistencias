@@ -20,25 +20,25 @@
 
 <AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pe.gob.sunat.gestion.asistencias.controller.GestionEventosController">
    <children>
-      <Label layoutX="193.0" layoutY="14.0" text="Gestion de Eventos">
+      <Label layoutX="179.0" layoutY="14.0" text="Gestion de Eventos">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
       </Label>
-      <HBox layoutX="14.0" layoutY="49.0" prefHeight="34.0" prefWidth="520.0">
+      <HBox layoutY="49.0" prefHeight="34.0" prefWidth="545.0">
          <children>
-            <VBox prefHeight="200.0" prefWidth="125.0">
+            <VBox prefHeight="200.0" prefWidth="120.0">
                <children>
-                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" focusTraversable="false" prefHeight="17.0" prefWidth="118.0" text="Nombre del Evento :" textAlignment="RIGHT">
+                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" focusTraversable="false" prefHeight="17.0" prefWidth="120.0" text="Nombre del Evento :" textAlignment="RIGHT">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                        <Insets bottom="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                   </Label>
                </children>
             </VBox>
-            <VBox prefHeight="200.0" prefWidth="395.0">
+            <VBox prefHeight="200.0" prefWidth="425.0">
                <children>
-                  <TextField fx:id="textNombreEvento" focusTraversable="false">
+                  <TextField fx:id="txtNombreEvento" focusTraversable="false" prefHeight="25.0" prefWidth="425.0" promptText="Nombre del Evento">
                      <VBox.margin>
                         <Insets bottom="5.0" top="5.0" />
                      </VBox.margin>
@@ -47,47 +47,47 @@
             </VBox>
          </children>
       </HBox>
-      <HBox layoutX="14.0" layoutY="84.0" prefHeight="34.0" prefWidth="520.0">
+      <HBox layoutY="84.0" prefHeight="34.0" prefWidth="545.0">
          <children>
-            <VBox prefHeight="200.0" prefWidth="125.0">
+            <VBox prefHeight="200.0" prefWidth="120.0">
                <children>
-                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="125.0" text="Fecha del Evento :" textAlignment="RIGHT">
+                  <Label alignment="CENTER_RIGHT" contentDisplay="RIGHT" prefHeight="17.0" prefWidth="120.0" text="Fecha del Evento :" textAlignment="RIGHT">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                        <Insets bottom="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                   </Label>
                </children>
             </VBox>
-            <VBox prefHeight="200.0" prefWidth="125.0">
+            <VBox prefHeight="200.0" prefWidth="115.0">
                <children>
-                  <DatePicker fx:id="dpFechaEvento">
+                  <DatePicker fx:id="datePikerFechaEvento" promptText="dd/mm/yyyy">
                      <VBox.margin>
                         <Insets bottom="5.0" top="5.0" />
                      </VBox.margin></DatePicker>
                </children>
             </VBox>
-            <VBox prefHeight="200.0" prefWidth="125.0">
+            <VBox prefHeight="200.0" prefWidth="104.0">
                <children>
-                  <Label alignment="BOTTOM_LEFT" contentDisplay="RIGHT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="17.0" prefWidth="125.0" text="Hora del Evento :" textAlignment="RIGHT">
+                  <Label alignment="BOTTOM_LEFT" contentDisplay="RIGHT" nodeOrientation="RIGHT_TO_LEFT" prefHeight="17.0" prefWidth="110.0" text="Hora del Evento :" textAlignment="RIGHT">
                      <VBox.margin>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                        <Insets bottom="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                   </Label>
                </children>
             </VBox>
-            <VBox prefHeight="200.0" prefWidth="125.0">
+            <VBox prefHeight="35.0" prefWidth="206.0">
                <children>
-                  <HBox prefHeight="100.0" prefWidth="200.0">
+                  <HBox prefHeight="100.0" prefWidth="286.0">
                      <children>
-                        <ComboBox fx:id="cboxHora" prefWidth="40.0">
+                        <ComboBox fx:id="comboHora" prefWidth="94.0" promptText="hh">
                            <HBox.margin>
                               <Insets bottom="5.0" top="5.0" />
                            </HBox.margin></ComboBox>
-                        <ComboBox fx:id="cboxMinuto" prefWidth="40.0">
+                        <ComboBox fx:id="comboMinuto" prefWidth="97.0" promptText="mm">
                            <HBox.margin>
                               <Insets bottom="5.0" top="5.0" />
                            </HBox.margin></ComboBox>
-                        <ComboBox fx:id="cboxSiglas" prefWidth="20.0">
+                        <ComboBox fx:id="comboSiglas" prefWidth="100.0" promptText="am/pm">
                            <HBox.margin>
                               <Insets bottom="5.0" top="5.0" />
                            </HBox.margin></ComboBox>
@@ -97,20 +97,20 @@
             </VBox>
          </children>
       </HBox>
-      <HBox layoutX="14.0" layoutY="119.0" prefHeight="34.0" prefWidth="520.0">
+      <HBox layoutY="119.0" prefHeight="34.0" prefWidth="545.0">
          <children>
-            <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="260.0">
+            <VBox alignment="CENTER_RIGHT" prefHeight="200.0" prefWidth="240.0">
                <children>
-                  <Button fx:id="btnRegistrarEvento" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" nodeOrientation="RIGHT_TO_LEFT" text="Registrar" textAlignment="CENTER">
+                  <Button fx:id="btnRegistrarEvento" alignment="CENTER_RIGHT" contentDisplay="RIGHT" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#guardarEvento" prefWidth="80.0" text="Registrar" textAlignment="CENTER">
                      <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
                   </Button>
                </children>
             </VBox>
-            <VBox prefHeight="200.0" prefWidth="260.0">
+            <VBox prefHeight="200.0" prefWidth="255.0">
                <children>
-                  <Button fx:id="btnLimpiarEvento" mnemonicParsing="false" text="Limpiar">
+                  <Button fx:id="btnLimpiarEvento" alignment="BOTTOM_LEFT" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onMouseClicked="#limpiarTabla" prefWidth="80.0" text="Limpiar">
                      <VBox.margin>
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </VBox.margin>
@@ -119,16 +119,19 @@
             </VBox>
          </children>
       </HBox>
-      <HBox layoutX="14.0" layoutY="167.0" prefHeight="150.0" prefWidth="520.0">
+      <HBox layoutY="168.0" prefHeight="150.0" prefWidth="545.0">
          <children>
-            <TableView fx:id="tvGestionEventos" prefHeight="150.0" prefWidth="520.0">
+            <TableView fx:id="tablaGestionEventos" prefHeight="175.0" prefWidth="544.0">
               <columns>
-                <TableColumn prefWidth="75.0" text="Id" />
-                <TableColumn prefWidth="200.0" text="Nombre del Evento" />
-                  <TableColumn prefWidth="75.0" text="Fecha" />
-                  <TableColumn prefWidth="75.0" text="Hora" />
-                  <TableColumn prefWidth="75.0" text="Estado" />
+                <TableColumn fx:id="idColumn" prefWidth="40.0" text="Id" />
+                <TableColumn fx:id="nombreColumn" minWidth="100.0" prefWidth="260.0" text="Nombre del Evento" />
+                  <TableColumn fx:id="fechaColumn" prefWidth="90.0" text="Fecha" />
+                  <TableColumn fx:id="horaColumn" prefWidth="90.0" text="Hora" />
+                  <TableColumn fx:id="estadoColumn" prefWidth="64.0" text="Estado" />
               </columns>
+               <HBox.margin>
+                  <Insets left="1.0" />
+               </HBox.margin>
             </TableView>
          </children>
       </HBox>
