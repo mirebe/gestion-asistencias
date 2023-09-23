@@ -8,8 +8,8 @@ module pe.gob.sunat.gestion.asistencias {
     requires converter.scalars;
     requires converter.gson;
     requires converter.jackson;
-    
-    //requires retrofit2;
+     
+   //requires retrofit2;
     //requires retrofit2.converter.gson;
     //requires retrofit2.converter.scalars;
     //requires retrofit2.converter.jackson;

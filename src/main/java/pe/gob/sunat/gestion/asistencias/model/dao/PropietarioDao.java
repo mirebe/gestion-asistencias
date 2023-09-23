@@ -4,6 +4,7 @@
  */
 package pe.gob.sunat.gestion.asistencias.model.dao;
 
+import java.util.List;
 import pe.gob.sunat.gestion.asistencias.model.entities.Propietario;
 
 /**
@@ -12,4 +13,5 @@ import pe.gob.sunat.gestion.asistencias.model.entities.Propietario;
  */
 public interface PropietarioDao {
     public Propietario buscarPropietarioxDni(String dni) throws Exception;
+    public List <Propietario> buscarPropietarios() throws Exception;
 }

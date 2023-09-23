@@ -4,10 +4,18 @@
  */
 package pe.gob.sunat.gestion.asistencias.service;
 
+
+import java.util.List;
+import java.util.Map;
+import pe.gob.sunat.gestion.asistencias.model.entities.Propietario;
+
 /**
  *
  * @author mireb
  */
 public interface PropietarioService {
+    public Propietario buscarPropietarioxDni(String dni) throws Exception;
+    public  List <Propietario> buscarPropietarios() throws Exception;
+    public Map<String,Object> validarDatosPropietario(Propietario propietario,Integer[] reglas) throws Exception;
     
 }
