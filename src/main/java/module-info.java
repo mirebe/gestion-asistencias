@@ -16,6 +16,7 @@ module pe.gob.sunat.gestion.asistencias {
     requires jackson.annotations;
    
     opens pe.gob.sunat.gestion.asistencias;
+    opens pe.gob.sunat.gestion.asistencias.model.entities to javafx.base;
     opens pe.gob.sunat.gestion.asistencias.service.client;
     opens pe.gob.sunat.gestion.asistencias.service.dto;
     opens pe.gob.sunat.gestion.asistencias.controller to javafx.fxml;
