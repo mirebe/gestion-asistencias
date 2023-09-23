@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import pe.gob.sunat.gestion.asistencias.model.dao.EventoDao;
@@ -41,11 +42,7 @@ public class EventoDaoImpl implements EventoDao {
         PreparedStatement ps = cn.prepareStatement(Q_LISTAR_EVENTOS_ACTIVOS);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-            Evento evento = new Evento();
-            evento.setIdEvento(rs.getInt("idEvento"));
-            evento.setDescripcion(rs.getString("descripcion"));
-
-            lista.add(evento);
+            lista.add(new Evento(rs.getLong("idEvento"), rs.getString("descripcion")));
         }
         rs.close();
         ps.close();
@@ -86,14 +83,9 @@ public class EventoDaoImpl implements EventoDao {
         PreparedStatement ps = cn.prepareStatement(Q_LISTAR_TODOS_EVENTOS);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-            Evento evento = new Evento();
-            evento.setIdEvento(rs.getInt("idEvento"));
-            evento.setDescripcion(rs.getString("descripcion"));
-            evento.setFechaEvento(rs.getDate("fechaEvento").toLocalDate());
-            evento.setHoraEvento(rs.getTimestamp("horaEvento").toLocalDateTime());
-            evento.setEstado(rs.getInt("estado"));
-            evento.setAnioEvento(rs.getInt("anioEvento"));
-            lista.add(evento);
+            lista.add(new Evento(rs.getLong("idEvento"), rs.getString("descripcion"),
+                    rs.getDate("fechaEvento").toLocalDate(), rs.getTimestamp("horaEvento").toLocalDateTime(),
+                    rs.getInt("anioEvento"), rs.getInt("estado")));
         }
         rs.close();
         ps.close();
@@ -107,14 +99,9 @@ public class EventoDaoImpl implements EventoDao {
         ps.setLong(1, idEvento);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-            Evento evento = new Evento();
-            evento.setIdEvento(rs.getInt("idEvento"));
-            evento.setDescripcion(rs.getString("descripcion"));
-            evento.setFechaEvento(rs.getDate("fechaEvento").toLocalDate());
-            evento.setHoraEvento(rs.getTimestamp("horaEvento").toLocalDateTime());
-            evento.setEstado(rs.getInt("estado"));
-            evento.setAnioEvento(rs.getInt("anioEvento"));
-            lista.add(evento);
+            lista.add(new Evento(rs.getLong("idEvento"), rs.getString("descripcion"),
+                    rs.getDate("fechaEvento").toLocalDate(), rs.getTimestamp("horaEvento").toLocalDateTime(),
+                    rs.getInt("anioEvento"), rs.getInt("estado")));
         }
         rs.close();
         ps.close();
@@ -130,7 +117,7 @@ public class EventoDaoImpl implements EventoDao {
             pstmt.setDate(2, java.sql.Date.valueOf(evento.getFechaEvento()));
             pstmt.setTimestamp(3, java.sql.Timestamp.valueOf(evento.getHoraEvento()));
             pstmt.setInt(4, java.sql.Date.valueOf(evento.getFechaEvento()).getYear());
-            pstmt.setInt(5, evento.getIdEvento());
+            pstmt.setLong(5, evento.getIdEvento());
             pstmt.executeUpdate();
         } catch (SQLException se) {
             System.out.println(se.getMessage());
@@ -149,7 +136,7 @@ public class EventoDaoImpl implements EventoDao {
     }
 
     @Override
-    public void desactivarEvento(Long idEvento) throws Exception{
+    public void desactivarEvento(Long idEvento) throws Exception {
         PreparedStatement pstmt = null;
         try {
             pstmt = cn.prepareStatement(Q_DESACTIVAR_EVENTOS_IDEVENTO);
@@ -172,20 +159,15 @@ public class EventoDaoImpl implements EventoDao {
     }
 
     @Override
-    public List<Evento> buscarEventoPorFecha(LocalDate fechaEvento) throws Exception{
+    public List<Evento> buscarEventoPorFecha(LocalDate fechaEvento) throws Exception {
         List<Evento> lista = new ArrayList<>();
         PreparedStatement ps = cn.prepareStatement(Q_BUSCAR_EVENTOS_FECHA);
         ps.setDate(1, java.sql.Date.valueOf(fechaEvento));
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-            Evento evento = new Evento();
-            evento.setIdEvento(rs.getInt("idEvento"));
-            evento.setDescripcion(rs.getString("descripcion"));
-            evento.setFechaEvento(rs.getDate("fechaEvento").toLocalDate());
-            evento.setHoraEvento(rs.getTimestamp("horaEvento").toLocalDateTime());
-            evento.setEstado(rs.getInt("estado"));
-            evento.setAnioEvento(rs.getInt("anioEvento"));
-            lista.add(evento);
+            lista.add(new Evento(rs.getLong("idEvento"), rs.getString("descripcion"),
+                    rs.getDate("fechaEvento").toLocalDate(), rs.getTimestamp("horaEvento").toLocalDateTime(),
+                    rs.getInt("anioEvento"), rs.getInt("estado")));
         }
         rs.close();
         ps.close();
@@ -193,20 +175,15 @@ public class EventoDaoImpl implements EventoDao {
     }
 
     @Override
-    public List<Evento> buscarEventoPorAnio(int anioEvento) throws Exception{
+    public List<Evento> buscarEventoPorAnio(int anioEvento) throws Exception {
         List<Evento> lista = new ArrayList<>();
         PreparedStatement ps = cn.prepareStatement(Q_BUSCAR_EVENTOS_ANIO);
         ps.setInt(1, anioEvento);
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
-            Evento evento = new Evento();
-            evento.setIdEvento(rs.getInt("idEvento"));
-            evento.setDescripcion(rs.getString("descripcion"));
-            evento.setFechaEvento(rs.getDate("fechaEvento").toLocalDate());
-            evento.setHoraEvento(rs.getTimestamp("horaEvento").toLocalDateTime());
-            evento.setEstado(rs.getInt("estado"));
-            evento.setAnioEvento(rs.getInt("anioEvento"));
-            lista.add(evento);
+            lista.add(new Evento(rs.getLong("idEvento"), rs.getString("descripcion"),
+                    rs.getDate("fechaEvento").toLocalDate(), rs.getTimestamp("horaEvento").toLocalDateTime(),
+                    rs.getInt("anioEvento"), rs.getInt("estado")));
         }
         rs.close();
         ps.close();
