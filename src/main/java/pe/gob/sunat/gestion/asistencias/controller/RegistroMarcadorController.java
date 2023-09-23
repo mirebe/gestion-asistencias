@@ -1,31 +1,40 @@
 package pe.gob.sunat.gestion.asistencias.controller;
 
 import java.net.URL;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.Map;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.concurrent.Service;
+import javafx.concurrent.Task;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import pe.gob.sunat.gestion.asistencias.model.entities.Asistencia;
 import pe.gob.sunat.gestion.asistencias.model.entities.Evento;
 import pe.gob.sunat.gestion.asistencias.model.entities.Propietario;
 import pe.gob.sunat.gestion.asistencias.service.AsistenciaService;
 import pe.gob.sunat.gestion.asistencias.service.EventoService;
 import pe.gob.sunat.gestion.asistencias.service.LoginService;
+import pe.gob.sunat.gestion.asistencias.service.client.RestClientHora;
 import pe.gob.sunat.gestion.asistencias.service.impl.AsistenciaServiceImpl;
 import pe.gob.sunat.gestion.asistencias.service.impl.EventoServiceImpl;
 import pe.gob.sunat.gestion.asistencias.service.impl.LoginServiceImpl;
 import pe.gob.sunat.gestion.asistencias.util.FXMLArchivo;
 import pe.gob.sunat.gestion.asistencias.util.IconosAwesome;
+import pe.gob.sunat.gestion.asistencias.util.ProcesosAsincronos;
 
 /**
  *
@@ -49,6 +58,12 @@ public class RegistroMarcadorController implements Initializable{
     Label lblNombres;
     @FXML
     ComboBox<Evento> cboEvento;
+    @FXML
+    Button btnMarcar;
+    @FXML
+    Label lblReloj;
+    
+    Propietario propietario = null;
     
     public RegistroMarcadorController() {
         this.asistenciaService = new AsistenciaServiceImpl();
@@ -60,10 +75,13 @@ public class RegistroMarcadorController implements Initializable{
         try {
             Map<String,Object> response  = asistenciaService.buscarPropietario(txtDni.getText(),new Integer[]{1,2,3});
             if(Boolean.parseBoolean(response.get("STATUS").toString())){
-                Propietario pro = (Propietario) response.get("propietario");
-                lblNombres.setText(pro.getNombresCompleto());
-                System.out.println("pe.gob.sunat.gestion");
+                propietario = (Propietario) response.get("propietario");
+                lblNombres.setText(propietario.getNombresCompleto());
+                btnMarcar.setDisable(false);
             }else{
+                lblNombres.setText("");
+                propietario = null;
+                btnMarcar.setDisable(true);
                 mostrarMensaje(response.get("MSG").toString(), "Mensaje Error", IconosAwesome.ERROR);
             }
         } catch (Exception ex) {
@@ -74,10 +92,34 @@ public class RegistroMarcadorController implements Initializable{
     
     @FXML
     private void onClick_marcarIngreso(){
-        Evento e = cboEvento.getSelectionModel().getSelectedItem();
-        if(e!=null){
-            System.err.println("ID:"+e.getIdEvento()+" DES:"+e.getDescripcion());
+        Evento evento = cboEvento.getSelectionModel().getSelectedItem();
+        if(propietario == null){
+             mostrarMensaje("Propietario no encontrado", "Mensaje Error", IconosAwesome.ERROR);
+        }
+        if(evento!=null){
+            //System.err.println("ID:"+evento.getIdEvento()+" DES:"+evento.getDescripcion());
+            try {
+                Asistencia as = new Asistencia();
+                as.setIdPropietario(propietario.getIdPropietario().longValue());
+                as.setIdEvento(evento.getIdEvento().longValue());
+                boolean estado = asistenciaService.grabarAsistencia(as);
+                if(estado){
+                    mostrarMensaje("Se registro su asistencia correctamente!!!!", "Mensaje Aviso", IconosAwesome.CORRECTO);
+                }else{
+                    mostrarMensaje("Ya se encuentra registrado en el evento!!!.", "Mensaje Error", IconosAwesome.ERROR);
+                }
+               
+                lblNombres.setText("");
+                propietario = null;
+                btnMarcar.setDisable(true);
+                cboEvento.getSelectionModel().clearSelection();
+                txtDni.clear();
+            } catch (Exception ex) {
+                mostrarMensaje("Ocurrio un error al registrar", "Mensaje Error", IconosAwesome.ERROR);
+                Logger.getLogger(RegistroMarcadorController.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }else{
+            mostrarMensaje("Seleccione el evento a registrarse.", "Mensaje Error", IconosAwesome.ERROR);
             System.out.println("seleccione...........");
         }
         
@@ -101,9 +143,22 @@ public class RegistroMarcadorController implements Initializable{
         } catch (Exception ex) {
             Logger.getLogger(RegistroMarcadorController.class.getName()).log(Level.SEVERE, null, ex);
         }
-        
-      
-        
+        updateFechaSistema();
+    }
+    
+    private void updateFechaSistema(){
+        ProcesosAsincronos pro = new ProcesosAsincronos();
+        pro.Ejecutar(() -> {
+             DateTimeFormatter formateador = DateTimeFormatter.ofPattern("HH:mm:ss");
+            while (true) {
+                 try {
+                       Thread.sleep(1000);
+                } catch (InterruptedException e) {}
+                 Platform.runLater(() -> {
+                     lblReloj.setText(formateador.format(LocalDateTime.now()));
+                 });
+            }
+        }); 
     }
     
     private void mostrarMensaje(String mensaje, String titulo, IconosAwesome icono) {

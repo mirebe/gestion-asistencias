@@ -4,6 +4,7 @@
  */
 package pe.gob.sunat.gestion.asistencias.service.impl;
 
+import java.time.LocalDateTime;
 import java.util.HashMap;
 import java.util.Map;
 import pe.gob.sunat.gestion.asistencias.model.dao.AsistenciaDao;
@@ -14,6 +15,7 @@ import pe.gob.sunat.gestion.asistencias.model.entities.Asistencia;
 import pe.gob.sunat.gestion.asistencias.model.entities.Propietario;
 import pe.gob.sunat.gestion.asistencias.model.util.Conexion;
 import pe.gob.sunat.gestion.asistencias.service.AsistenciaService;
+import pe.gob.sunat.gestion.asistencias.service.client.RestClientHora;
 
 /**
  *
@@ -29,8 +31,17 @@ public class AsistenciaServiceImpl implements AsistenciaService{
     }
 
     @Override
-    public void grabarAsistencia(Asistencia asistencia) throws Exception{
-         asistenciaDao.guardar(asistencia);
+    public boolean grabarAsistencia(Asistencia asistencia) throws Exception{
+        RestClientHora rest = new RestClientHora();
+        LocalDateTime hora = rest.obtenerHoraWoldTimeApi();
+        asistencia.setFechaHoraAsistencia(hora);
+        
+        System.out.println(hora);
+        if(!asistenciaDao.existeAsistencia(asistencia.getIdPropietario(), asistencia.getIdEvento())){
+            asistenciaDao.guardar(asistencia);
+            return true;
+        }
+        return false;
     }
     
     public Map<String,Object> buscarPropietario(String dniProp,Integer[] reglas) throws Exception{

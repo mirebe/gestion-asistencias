@@ -11,14 +11,14 @@ import java.time.LocalDateTime;
  * @author mireb
  */
 public class Asistencia {
-    Integer idAsistencia;
-    Integer idPropietario;
-    Integer idEvento;
+    Long idAsistencia;
+    Long idPropietario;
+    Long idEvento;
     LocalDateTime fechaHoraAsistencia;
     Double montoMulta;
     String estado;
 
-    public Asistencia(Integer idAsistencia, Integer idPropietario, Integer idEvento, LocalDateTime fechaHoraAsistencia, Double montoMulta, String estado) {
+    public Asistencia(Long idAsistencia, Long idPropietario, Long idEvento, LocalDateTime fechaHoraAsistencia, Double montoMulta, String estado) {
         this.idAsistencia = idAsistencia;
         this.idPropietario = idPropietario;
         this.idEvento = idEvento;
@@ -30,27 +30,27 @@ public class Asistencia {
     public Asistencia() {
     }
 
-    public Integer getIdAsistencia() {
+    public Long getIdAsistencia() {
         return idAsistencia;
     }
 
-    public void setIdAsistencia(Integer idAsistencia) {
+    public void setIdAsistencia(Long idAsistencia) {
         this.idAsistencia = idAsistencia;
     }
 
-    public Integer getIdPropietario() {
+    public Long getIdPropietario() {
         return idPropietario;
     }
 
-    public void setIdPropietario(Integer idPropietario) {
+    public void setIdPropietario(Long idPropietario) {
         this.idPropietario = idPropietario;
     }
 
-    public Integer getIdEvento() {
+    public Long getIdEvento() {
         return idEvento;
     }
 
-    public void setIdEvento(Integer idEvento) {
+    public void setIdEvento(Long idEvento) {
         this.idEvento = idEvento;
     }
 

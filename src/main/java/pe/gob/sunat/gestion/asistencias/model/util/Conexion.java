@@ -18,7 +18,7 @@ public class Conexion {
     private int PORT = 3306;
     private String DB_NAME = "asistencia_db";
     private String USERNAME = "root";
-    private String PASSWORD = "mysql";
+    private String PASSWORD = "root";
     private static Connection connection = null;
     
     private Conexion() {

@@ -12,4 +12,5 @@ import pe.gob.sunat.gestion.asistencias.model.entities.Asistencia;
  */
 public interface AsistenciaDao {
     public void guardar(Asistencia asistencia) throws Exception;
+    public boolean existeAsistencia(Long idPropietario,Long idEvento) throws Exception ;
 }

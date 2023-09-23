@@ -12,6 +12,6 @@ import pe.gob.sunat.gestion.asistencias.model.entities.Asistencia;
  * @author mireb
  */
 public interface AsistenciaService {
-    void grabarAsistencia(Asistencia asistencia)  throws Exception;
+    boolean grabarAsistencia(Asistencia asistencia)  throws Exception;
     Map<String,Object> buscarPropietario(String dniProp,Integer[] reglas) throws Exception;
 }

@@ -50,7 +50,7 @@
             </HBox>
             <VBox alignment="CENTER">
                <children>
-                  <Label fx:id="lblReloj" alignment="CENTER" text="08:30 AM" textFill="#252297">
+                  <Label fx:id="lblReloj" alignment="CENTER" textFill="#252297">
                      <font>
                         <Font name="System Bold" size="36.0" />
                      </font>
@@ -152,7 +152,7 @@
             </HBox>
             <VBox alignment="CENTER" prefHeight="200.0">
                <children>
-                  <Button fx:id="btnMarcar" mnemonicParsing="false" onAction="#onClick_marcarIngreso" prefWidth="300.0" text="Marcar Entrada">
+                  <Button fx:id="btnMarcar" disable="true" mnemonicParsing="false" onAction="#onClick_marcarIngreso" prefWidth="300.0" text="Marcar Entrada">
                      <cursor>
                         <Cursor fx:constant="HAND" />
                      </cursor>
