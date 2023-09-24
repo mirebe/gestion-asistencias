@@ -6,7 +6,10 @@ package pe.gob.sunat.gestion.asistencias.service;
 
 import java.time.LocalDate;
 import java.util.List;
+import pe.gob.sunat.gestion.asistencias.model.entities.AsistenciaEvento;
 import pe.gob.sunat.gestion.asistencias.model.entities.Evento;
+import pe.gob.sunat.gestion.asistencias.model.entities.EventoCombo;
+import pe.gob.sunat.gestion.asistencias.model.entities.EventoDashboard;
 
 /**
  *
@@ -28,5 +31,10 @@ public interface EventoService {
     List<Evento> buscarEventoPorFecha(LocalDate fechaEvento) throws Exception;
 
     List<Evento> buscarEventoPorAnio(int anioEvento) throws Exception;
+
+    List<EventoCombo> listarEventosActivos2() throws Exception;
     
+    List<EventoDashboard> listarEventoDashboard(int tipoC, String txtbusqueda, Long idEvento) throws Exception;
+    
+    List<AsistenciaEvento> listarAsistents(Long idEvento) throws Exception ;
 }

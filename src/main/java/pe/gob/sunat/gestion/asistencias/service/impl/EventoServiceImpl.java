@@ -9,7 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 import pe.gob.sunat.gestion.asistencias.model.dao.EventoDao;
 import pe.gob.sunat.gestion.asistencias.model.dao.impl.EventoDaoImpl;
+import pe.gob.sunat.gestion.asistencias.model.entities.AsistenciaEvento;
 import pe.gob.sunat.gestion.asistencias.model.entities.Evento;
+import pe.gob.sunat.gestion.asistencias.model.entities.EventoCombo;
+import pe.gob.sunat.gestion.asistencias.model.entities.EventoDashboard;
 import pe.gob.sunat.gestion.asistencias.model.util.Conexion;
 import pe.gob.sunat.gestion.asistencias.service.EventoService;
 
@@ -69,4 +72,24 @@ public class EventoServiceImpl implements EventoService {
         List<Evento> eventos = eventoDao.buscarEventoPorAnio(anioEvento);
         return eventos;
     }
+
+    @Override
+    public List<EventoCombo> listarEventosActivos2() throws Exception {
+        List<EventoCombo> eventos = eventoDao.listarEventosActivos2();
+        return eventos;   
+    }
+
+    @Override
+    public List<EventoDashboard> listarEventoDashboard(int tipoC, String txtbusqueda, Long idEvento) throws Exception {
+        List<EventoDashboard> eventos = eventoDao.listarEventoDashboard( tipoC,  txtbusqueda,  idEvento);
+        return eventos;   
+    }
+
+    @Override
+    public List<AsistenciaEvento> listarAsistents(Long idEvento) throws Exception {
+        List<AsistenciaEvento> eventos = eventoDao.listarAsistents(idEvento);
+        return eventos;   
+    }
+    
+ 
 }
