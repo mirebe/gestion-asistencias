@@ -78,7 +78,7 @@ public class EventoDaoImpl implements EventoDao {
             rscount ++;
         }
         rs.close();
-        ps.close();
+//        ps.close();
         System.out.println("cantidad de resultados  1er " + rscount);
             
         if(rscount == 0 )  {
@@ -91,7 +91,7 @@ public class EventoDaoImpl implements EventoDao {
                 lista.add(new AsistenciaEvento(0L, rs2.getLong("capacidad")));
             }
         rs2.close();
-        ps2.close();    
+//        ps2.close();    
             
         }  
         
@@ -132,7 +132,6 @@ public class EventoDaoImpl implements EventoDao {
              ps = cn.prepareStatement(Q_BUSCAR_EVENTOS_DASHBOARD3);
              ps.setString(1, txtbusqueda);
              ps.setLong(2, idEvento);
-
              
              System.out.println(Q_BUSCAR_EVENTOS_DASHBOARD1);
            
@@ -149,7 +148,6 @@ public class EventoDaoImpl implements EventoDao {
                             rs.getString("nombreCondominio")));
         }
         rs.close();
-        ps.close();
         return lista;
     }    
     
@@ -164,8 +162,6 @@ public class EventoDaoImpl implements EventoDao {
             lista.add(new Evento(rs.getLong("idEvento"), rs.getString("descripcion")));
         }
         rs.close();
-        ps.close();
-
         return lista;
     }
 
@@ -178,8 +174,6 @@ public class EventoDaoImpl implements EventoDao {
             lista.add(new EventoCombo(rs.getLong("idEvento"), rs.getString("descripcion")));
         }
         rs.close();
-        ps.close();
-
         return lista;
     }
     
@@ -198,15 +192,11 @@ public class EventoDaoImpl implements EventoDao {
         } catch (SQLException se) {
             System.out.println(se.getMessage());
         } finally {
-            try {
-                if (cn != null) {
-                    cn.close();
-                }
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-            } catch (SQLException se) {
-                System.out.println(se.getMessage());
+            if (cn != null) {
+//                    cn.close();
+            }
+            if (pstmt != null) {
+//                    pstmt.close();
             }
         }
     }
@@ -222,7 +212,6 @@ public class EventoDaoImpl implements EventoDao {
                     rs.getInt("anioEvento"), rs.getInt("estado")));
         }
         rs.close();
-        ps.close();
         return lista;
     }
 
@@ -238,7 +227,6 @@ public class EventoDaoImpl implements EventoDao {
                     rs.getInt("anioEvento"), rs.getInt("estado")));
         }
         rs.close();
-        ps.close();
         return lista.get(0);
     }
 
@@ -256,15 +244,11 @@ public class EventoDaoImpl implements EventoDao {
         } catch (SQLException se) {
             System.out.println(se.getMessage());
         } finally {
-            try {
-                if (cn != null) {
-                    cn.close();
-                }
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-            } catch (SQLException se) {
-                System.out.println(se.getMessage());
+            if (cn != null) {
+//                    cn.close();
+            }
+            if (pstmt != null) {
+//                    pstmt.close();
             }
         }
     }
@@ -279,15 +263,11 @@ public class EventoDaoImpl implements EventoDao {
         } catch (SQLException se) {
             System.out.println(se.getMessage());
         } finally {
-            try {
-                if (cn != null) {
-                    cn.close();
-                }
-                if (pstmt != null) {
-                    pstmt.close();
-                }
-            } catch (SQLException se) {
-                System.out.println(se.getMessage());
+            if (cn != null) {
+//                    cn.close();
+            }
+            if (pstmt != null) {
+//                    pstmt.close();
             }
         }
     }
@@ -304,7 +284,6 @@ public class EventoDaoImpl implements EventoDao {
                     rs.getInt("anioEvento"), rs.getInt("estado")));
         }
         rs.close();
-        ps.close();
         return lista;
     }
 
@@ -320,7 +299,6 @@ public class EventoDaoImpl implements EventoDao {
                     rs.getInt("anioEvento"), rs.getInt("estado")));
         }
         rs.close();
-        ps.close();
         return lista;
     }
 }

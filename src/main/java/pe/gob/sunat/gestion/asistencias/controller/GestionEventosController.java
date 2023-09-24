@@ -10,7 +10,10 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.beans.binding.StringBinding;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
@@ -109,8 +112,10 @@ public class GestionEventosController implements Initializable {
             eventoActual.setFechaEvento(eventoNuevo.getFechaEvento());
             eventoActual.setHoraEvento(eventoNuevo.getHoraEvento());
             eventoActual.setEstado1(eventoNuevo.getEstado());
+            txtNombreEvento.setText(eventoNuevo.getDescripcion());
+            datePikerFechaEvento.setValue(eventoNuevo.getFechaEvento());
         } else {
-            eventoActual = new Evento(0l, "", LocalDate.now(), LocalDateTime.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth(), 0, 0), 0, 0);
+            eventoActual = new Evento(0L, "", LocalDate.now(), LocalDateTime.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth(), 0, 0), 0, 0);
         }
     }
 
@@ -136,55 +141,55 @@ public class GestionEventosController implements Initializable {
     }
 
     @FXML
-    private void limpiarTabla() {
-        eventoActual = new Evento(0L, "", LocalDate.now(), LocalDateTime.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth(), 0, 0), 0, 0);
+    private void limpiarDatos() {
+//        eventoActual = new Evento(0L, "", LocalDate.now(), LocalDateTime.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth(), 0, 0), 0, 0);
+        txtNombreEvento.clear();
+        datePikerFechaEvento.setValue(null);
+        comboHora.setValue(null);
+        comboMinuto.setValue(null);
+        comboSiglas.setValue(null);
         cargarCombos();
+        enlazarTabla();
     }
 
     private void llenarDatosEnTabla() {
         try {
+            eventoData.clear();
             List<Evento> list = eventoService.listarEvento();
             eventoData.addAll(list);
         } catch (Exception e) {
             System.out.println("Error llenarDatosEnTabla =" + e.getMessage());
-            e.printStackTrace();
         }
     }
 
     public void guardarEvento(ActionEvent event) {
         if (eventoActual.getIdEvento() == 0) {
-
-            if (eventoActual.getDescripcion().isEmpty() || eventoActual.getDescripcion().equals("")) {
-                mostrarAlertas("Warning", "Ingrese Descripcion del Evento", Alert.AlertType.WARNING);
-                return;
+            if (validarCampos(eventoActual)) {
+                eventoActual.setHoraEvento(LocalDateTime.of(eventoActual.getFechaEvento().getYear(), eventoActual.getFechaEvento().getMonth(), eventoActual.getFechaEvento().getDayOfMonth(), Integer.parseInt(convertir24H(comboHora.getValue().toString(), comboSiglas.getValue().toString())), Integer.parseInt(comboMinuto.getValue().toString())));
+                eventoActual.setAnioEvento(eventoActual.getFechaEvento().getYear());
+                eventoActual.setEstado1(EstadoEnum.ACTIVO.getValor());
+                try {
+                    eventoService.guardarEvento(eventoActual);
+                    mostrarAlertas("Informacion", "Se guardo exitosamente", Alert.AlertType.INFORMATION);
+                    llenarDatosEnTabla();
+                } catch (Exception ex) {
+                    mostrarAlertas("ERROR", "Excepcion=" + ex.getMessage(), Alert.AlertType.ERROR);
+                }
+                limpiarFormulario();
             }
-            if (eventoActual.getFechaEvento() == null || eventoActual.getFechaEvento().equals("")) {
-                mostrarAlertas("Warning", "Ingrese Fecha del Evento", Alert.AlertType.WARNING);
-                return;
+        } else {
+            if (validarCampos(eventoActual)) {
+                try {
+                    eventoActual.setHoraEvento(LocalDateTime.of(eventoActual.getFechaEvento().getYear(), eventoActual.getFechaEvento().getMonth(), eventoActual.getFechaEvento().getDayOfMonth(), Integer.parseInt(convertir24H(comboHora.getValue().toString(), comboSiglas.getValue().toString())), Integer.parseInt(comboMinuto.getValue().toString())));
+                    eventoActual.setAnioEvento(eventoActual.getFechaEvento().getYear());
+                    eventoActual.setEstado1(EstadoEnum.ACTIVO.getValor());
+                    eventoService.actualizarEvento(eventoActual);
+                    llenarDatosEnTabla();
+                } catch (Exception ex) {
+                    Logger.getLogger(GestionEventosController.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                limpiarFormulario();
             }
-            if (comboHora.getValue() == null || comboHora.getValue().equals("")) {
-                mostrarAlertas("Warning", "Ingrese Hora", Alert.AlertType.WARNING);
-                return;
-            }
-            if (comboMinuto.getValue() == null || comboMinuto.getValue().equals("")) {
-                mostrarAlertas("Warning", "Ingrese Minuto", Alert.AlertType.WARNING);
-                return;
-            }
-            if (comboSiglas.getValue() == null || comboSiglas.getValue().equals("")) {
-                mostrarAlertas("Warning", "Ingrese Macador", Alert.AlertType.WARNING);
-                return;
-            }
-            eventoActual.setHoraEvento(LocalDateTime.of(eventoActual.getFechaEvento().getYear(), eventoActual.getFechaEvento().getMonth(), eventoActual.getFechaEvento().getDayOfMonth(), Integer.parseInt(convertir24H(comboHora.getValue().toString(),comboSiglas.getValue().toString())), Integer.parseInt(comboMinuto.getValue().toString())));
-            eventoActual.setAnioEvento(eventoActual.getFechaEvento().getYear());
-            eventoActual.setEstado1(EstadoEnum.ACTIVO.getValor());
-            try {
-                eventoService.guardarEvento(eventoActual);
-                mostrarAlertas("Informacion", "Se guardo exitosamente", Alert.AlertType.INFORMATION);
-            } catch (Exception ex) {
-                ex.printStackTrace();
-                mostrarAlertas("ERROR", "Excepcion="+ex.getMessage(), Alert.AlertType.ERROR);
-            }
-            llenarDatosEnTabla();
         }
     }
 
@@ -383,4 +388,40 @@ public class GestionEventosController implements Initializable {
             return marcador;
         }
     }
+
+    private void limpiarFormulario() {
+//        eventoActual = new Evento(0L, "", LocalDate.now(), LocalDateTime.of(LocalDate.now().getYear(), LocalDate.now().getMonth(), LocalDate.now().getDayOfMonth(), 0, 0), 0, 0);
+        txtNombreEvento.clear();
+        datePikerFechaEvento.setValue(null);
+        comboHora.setValue(null);
+        comboMinuto.setValue(null);
+        comboSiglas.setValue(null);
+        cargarCombos();
+        enlazarTabla();
+    }
+
+    private boolean validarCampos(Evento eventoActual) {
+        if (eventoActual.getDescripcion().isEmpty() || eventoActual.getDescripcion().equals("")) {
+            mostrarAlertas("Warning", "Ingrese Descripcion del Evento", Alert.AlertType.WARNING);
+            return false;
+        }
+        if (eventoActual.getFechaEvento() == null || eventoActual.getFechaEvento().equals("")) {
+            mostrarAlertas("Warning", "Ingrese Fecha del Evento", Alert.AlertType.WARNING);
+            return false;
+        }
+        if (comboHora.getValue() == null || comboHora.getValue().equals("")) {
+            mostrarAlertas("Warning", "Ingrese Hora", Alert.AlertType.WARNING);
+            return false;
+        }
+        if (comboMinuto.getValue() == null || comboMinuto.getValue().equals("")) {
+            mostrarAlertas("Warning", "Ingrese Minuto", Alert.AlertType.WARNING);
+            return false;
+        }
+        if (comboSiglas.getValue() == null || comboSiglas.getValue().equals("")) {
+            mostrarAlertas("Warning", "Ingrese Macador", Alert.AlertType.WARNING);
+            return false;
+        }
+        return true;
+    }
+
 }
