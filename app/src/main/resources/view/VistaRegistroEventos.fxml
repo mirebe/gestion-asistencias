@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane id="AnchorPane" fx:id="contenMain" stylesheets="@../../../../../src/main/resources/css/login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pe.gob.sunat.gestion.asistencias.controller.RegistroEventosController">
+   <children>
+      <VBox fx:id="panelContenedorMensaje" alignment="CENTER" layoutX="10.0" layoutY="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <AnchorPane maxHeight="300.0" maxWidth="600.0" minHeight="300.0" minWidth="600.0" prefHeight="300.0" prefWidth="600.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <VBox styleClass="modal" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                     <children>
+                        <VBox fx:id="contenedorTitulo">
+                           <children>
+                              <HBox>
+                                 <children>
+                                    <VBox HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label fx:id="lblTituloInterface" styleClass="tam_15px" text="Mantenimiento de Eventos" textFill="WHITE">
+                                             <font>
+                                                <Font name="System Bold" size="14.0" />
+                                             </font>
+                                             <padding>
+                                                <Insets left="10.0" />
+                                             </padding>
+                                          </Label>
+                                       </children>
+                                    </VBox>
+                                    <Button alignment="CENTER" contentDisplay="RIGHT" mnemonicParsing="false" nodeOrientation="LEFT_TO_RIGHT" onAction="#onClick_btnSalir" prefHeight="10.0" prefWidth="28.0" style="-fx-pref-width: 25px; -fx-background-color: transparent;" textAlignment="CENTER" textFill="WHITE">
+                                       <cursor>
+                                          <Cursor fx:constant="HAND" />
+                                       </cursor>
+                                       <font>
+                                          <Font name="System Bold" size="20.0" />
+                                       </font>
+                                       <graphic>
+                                          <FontAwesomeIcon fill="WHITE" iconName="TIMES" size="13px">
+                                             <font>
+                                                <Font size="5.0" />
+                                             </font>
+                                          </FontAwesomeIcon>
+                                       </graphic>
+                                       <padding>
+                                          <Insets top="-1.0" />
+                                       </padding>
+                                       <styleClass>
+                                          <String fx:value="bold" />
+                                          <String fx:value="tam_20px" />
+                                       </styleClass>
+                                    </Button>
+                                 </children>
+                                 <styleClass>
+                                    <String fx:value="modal-header" />
+                                    <String fx:value="tabMain" />
+                                 </styleClass>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <VBox spacing="10.0" style="-fx-border-color: #ccc;" VBox.vgrow="ALWAYS">
+                           <children>
+                              <VBox HBox.hgrow="ALWAYS">
+                                 <children>
+                                    <Label fx:id="labelTipo" text="Nombre de Evento">
+                                       <font>
+                                          <Font size="13.0" />
+                                       </font>
+                                    </Label>
+                                    <TextField fx:id="txtNombreEvento" prefHeight="27.0" prefWidth="165.0" promptText="Ingrese su nombre de evento" />
+                                 </children>
+                                 <padding>
+                                    <Insets left="10.0" right="10.0" />
+                                 </padding>
+                              </VBox>
+                              <HBox>
+                                 <children>
+                                    <VBox HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label fx:id="labelTipo1" text="Fecha del Evento">
+                                             <font>
+                                                <Font size="13.0" />
+                                             </font>
+                                          </Label>
+                                          <DatePicker fx:id="datePikerFechaEvento" editable="false" />
+                                       </children>
+                                       <padding>
+                                          <Insets left="10.0" right="10.0" />
+                                       </padding>
+                                    </VBox>
+                                    <VBox layoutX="10.0" layoutY="10.0" HBox.hgrow="ALWAYS">
+                                       <children>
+                                          <Label fx:id="labelTipo11" text="Hora del Evento :">
+                                             <font>
+                                                <Font size="13.0" />
+                                             </font>
+                                          </Label>
+                                          <HBox fx:id="hbHoraEvento" alignment="CENTER_LEFT">
+                                             <children>
+                                                <HBox alignment="CENTER">
+                                                   <children>
+                                                      <ComboBox fx:id="comboHora" minHeight="40.0" prefWidth="70.0" HBox.hgrow="ALWAYS" />
+                                                      <ComboBox fx:id="comboMinuto" editable="true" minHeight="40.0" prefWidth="70.0" HBox.hgrow="ALWAYS" />
+                                                   </children>
+                                                </HBox>
+                                                <VBox>
+                                                   <children>
+                                                      <RadioButton fx:id="rbAM" mnemonicParsing="false" text="AM" />
+                                                      <RadioButton fx:id="rbPM" mnemonicParsing="false" text="PM" />
+                                                   </children>
+                                                </VBox>
+                                             </children>
+                                          </HBox>
+                                       </children>
+                                       <padding>
+                                          <Insets left="10.0" right="10.0" />
+                                       </padding>
+                                    </VBox>
+                                 </children>
+                              </HBox>
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </VBox>
+                        <HBox alignment="CENTER_LEFT" nodeOrientation="RIGHT_TO_LEFT" spacing="10.0" style="-fx-background-color: white;">
+                           <children>
+                              <Button fx:id="botonAceptar" mnemonicParsing="false" onAction="#onActionAceptar" text="Grabar">
+                                 <styleClass>
+                                    <String fx:value="btn-fx" />
+                                    <String fx:value="btn-fx-primary" />
+                                 </styleClass>
+                              </Button>
+                              <Button fx:id="botonCancelar" mnemonicParsing="false" onAction="#onActionCancelar" text="Cancelar">
+                                 <styleClass>
+                                    <String fx:value="btn-fx" />
+                                    <String fx:value="btn-fx-default" />
+                                 </styleClass>
+                              </Button>
+                           </children>
+                           <padding>
+                              <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                  </VBox>
+               </children>
+            </AnchorPane>
+         </children>
+         <padding>
+            <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>

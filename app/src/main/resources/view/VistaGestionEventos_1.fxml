@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="AnchorPane" fx:id="contentMain" prefHeight="500.0" prefWidth="800.0" stylesheets="@../../../../../src/main/resources/css/login.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pe.gob.sunat.gestion.asistencias.controller.GestionEventosController">
+   <children>
+      <VBox prefWidth="790.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <VBox maxHeight="500.0" maxWidth="790.0" minHeight="500.0" minWidth="790.0" prefHeight="500.0" prefWidth="790.0" VBox.vgrow="ALWAYS">
+               <children>
+                  <HBox>
+                     <children>
+                        <Label text="Gestion de Eventos">
+                           <font>
+                              <Font name="System Bold" size="18.0" />
+                           </font>
+                        </Label>
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="20.0" />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+                  <VBox spacing="10.0" style="-fx-border-color: #ccc;">
+                     <children>
+                          <HBox alignment="CENTER_LEFT" prefHeight="0.0">
+                              <children>
+                                  <Label style="-fx-background-color: #ffffff;" text="Ingrese datos Busqueda" textFill="#070707">
+                                  <HBox.margin>
+      				<Insets />
+                                  </HBox.margin>
+                                  <font>
+                                      <Font name="System Bold" size="12.0" />
+                                  </font>
+                                  </Label>
+                              </children>
+      			<padding>
+                                  <Insets top="-23.0" />
+      			</padding>
+      			<VBox.margin>
+                                  <Insets />
+      			</VBox.margin>
+                          </HBox>
+                          <VBox HBox.hgrow="ALWAYS">
+                              <children>
+                                  <Label fx:id="labelTipo" text="Nombre de Evento">
+                                      <font>
+                                          <Font size="13.0" />
+                                      </font>
+                                  </Label>
+      
+      												<TextField fx:id="txtNombreEvento" prefHeight="27.0" prefWidth="165.0" promptText="Ingrese su nombre de evento" />
+      
+      											</children>
+      
+      											<padding>
+      
+      												<Insets left="10.0" right="10.0" />
+      
+      											</padding>
+      
+      										</VBox>
+                        <HBox alignment="CENTER_LEFT" spacing="10.0">
+                           <children>
+                              <Button fx:id="btnAgregar" mnemonicParsing="false" onAction="#onClick_btnAgregar" text="Agregar">
+                                 <styleClass>
+                                    <String fx:value="btn-fx" />
+                                    <String fx:value="btn-fx-primary" />
+                                 </styleClass></Button>
+                           </children>
+                           <padding>
+                              <Insets left="10.0" top="10.0" />
+                           </padding>
+                        </HBox>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                     <VBox.margin>
+                        <Insets left="10.0" right="10.0" />
+                     </VBox.margin>
+                  </VBox>
+                  <HBox prefHeight="100.0" VBox.vgrow="ALWAYS">
+                     <children>
+                        <ScrollPane prefHeight="259.0" prefWidth="770.0" HBox.hgrow="ALWAYS">
+                          <content>
+                            <AnchorPane prefHeight="261.0" prefWidth="765.0">
+                                 <children>
+                                    <TableView fx:id="tablaGestionEventos" maxWidth="790.0" prefHeight="238.0" prefWidth="760.0" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0">
+                                       <columns>
+                                          <TableColumn fx:id="idColumn" text="Id" />
+                                          <TableColumn fx:id="nombreColumn" minWidth="100.0" prefWidth="249.0" text="Nombre del Evento" />
+                                          <TableColumn fx:id="fechaColumn" prefWidth="96.0" text="Fecha" />
+                                          <TableColumn fx:id="horaColumn" prefWidth="90.0" text="Hora" />
+                                          <TableColumn fx:id="estadoColumn" prefWidth="92.0" text="Estado" />
+                                          <TableColumn fx:id="editCol" prefWidth="159.0" text="Opciones" />
+                                       </columns>
+                                    </TableView>
+                                 </children>
+                              </AnchorPane>
+                          </content>
+                        </ScrollPane>
+                     </children>
+                     <padding>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </padding>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+         <padding>
+            <Insets left="5.0" right="5.0" top="5.0" />
+         </padding>
+      </VBox>
+   </children>
+</AnchorPane>
