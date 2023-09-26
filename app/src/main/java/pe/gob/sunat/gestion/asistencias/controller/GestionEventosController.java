@@ -4,6 +4,7 @@
  */
 package pe.gob.sunat.gestion.asistencias.controller;
 
+import de.jensd.fx.glyphs.fontawesome.FontAwesomeIcon;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
@@ -144,8 +145,19 @@ public class GestionEventosController implements Initializable {
                         setGraphic(null);
                         setText(null);
                     } else {
-                        Label deleteIcon = new Label("Eliminar");
-                        Label editIcon = new Label("Editar");
+                        FontAwesomeIcon fntIconDel = new FontAwesomeIcon();
+                        fntIconDel.setIconName("CLOSE");
+                        fntIconDel.setSize("2.0em");
+                                
+                        FontAwesomeIcon fntIconEdit = new FontAwesomeIcon();
+                        fntIconEdit.setIconName("EDIT");
+                        fntIconEdit.setSize("2.0em");
+                        
+                        Label deleteIcon = new Label("");
+                        Label editIcon = new Label("");
+                                                
+                        deleteIcon.setGraphic(fntIconDel);
+                        editIcon.setGraphic(fntIconEdit);   
                         
                         deleteIcon.setOnMouseClicked((MouseEvent event) -> {
                             if(tablaGestionEventos.getSelectionModel()!=null){

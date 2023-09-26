@@ -107,11 +107,11 @@
                                     <TableView fx:id="tablaGestionEventos" maxWidth="790.0" prefHeight="238.0" prefWidth="760.0" AnchorPane.bottomAnchor="21.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="0.0">
                                        <columns>
                                           <TableColumn fx:id="idColumn" text="Id" />
-                                          <TableColumn fx:id="nombreColumn" minWidth="100.0" prefWidth="249.0" text="Nombre del Evento" />
+                                          <TableColumn fx:id="nombreColumn" minWidth="100.0" prefWidth="300.0" text="Nombre del Evento" />
                                           <TableColumn fx:id="fechaColumn" prefWidth="96.0" text="Fecha" />
                                           <TableColumn fx:id="horaColumn" prefWidth="90.0" text="Hora" />
-                                          <TableColumn fx:id="estadoColumn" prefWidth="92.0" text="Estado" />
-                                          <TableColumn fx:id="editCol" prefWidth="159.0" text="Opciones" />
+                                          <TableColumn fx:id="estadoColumn" prefWidth="100.0" text="Estado" />
+                                          <TableColumn fx:id="editCol" prefWidth="100.0" text="Opciones" />
                                        </columns>
                                     </TableView>
                                  </children>
