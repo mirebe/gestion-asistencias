@@ -12,11 +12,56 @@
 
 <AnchorPane id="AnchorPane" prefHeight="674.0" prefWidth="984.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pe.gob.sunat.gestion.asistencias.controller.DashboardController">
    <children>
-      <VBox alignment="BOTTOM_RIGHT" layoutX="332.0" layoutY="210.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="229.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+      <AnchorPane prefHeight="200.0" prefWidth="200.0">
          <children>
-            <Pane fx:id="paneview" prefHeight="182.0" prefWidth="230.0" VBox.vgrow="ALWAYS" />
+            <VBox layoutY="18.0" prefHeight="212.0" prefWidth="600.0" AnchorPane.bottomAnchor="-30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="-400.0" AnchorPane.topAnchor="18.0">
+               <children>
+                  <GridPane alignment="CENTER">
+                    <columnConstraints>
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                    </columnConstraints>
+                    <rowConstraints>
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                        <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                    </rowConstraints>
+                     <children>
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Seleccionar Evento : " textAlignment="CENTER" wrappingWidth="190.875" />
+                        <ComboBox fx:id="idcomboevento" onAction="#cambioCombo" prefHeight="31.0" prefWidth="294.0" GridPane.columnIndex="1" />
+                        <TextField fx:id="txtbusqueda" prefHeight="31.0" prefWidth="411.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                        <Button mnemonicParsing="false" onAction="#BotonConsultar" text="Consultar" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                        <RadioButton fx:id="r1" mnemonicParsing="false" onAction="#onCambio" prefHeight="21.0" prefWidth="276.0" text="Busqueda por Nombres y apellidos" GridPane.rowIndex="1">
+                           <toggleGroup>
+                              <ToggleGroup fx:id="rdbusqueda" />
+                           </toggleGroup>
+                        </RadioButton>
+                        <RadioButton fx:id="r2" mnemonicParsing="false" onAction="#onCambio" prefHeight="21.0" prefWidth="252.0" text="Busqueda por DNI" toggleGroup="$rdbusqueda" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                        <RadioButton fx:id="r3" mnemonicParsing="false" onAction="#onCambio" prefHeight="21.0" prefWidth="283.0" text="Busquda por ID Propietario" toggleGroup="$rdbusqueda" GridPane.rowIndex="2" />
+                     </children>
+                     <VBox.margin>
+                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                     </VBox.margin>
+                  </GridPane>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+      <VBox alignment="BOTTOM_RIGHT" layoutX="734.0" layoutY="146.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="229.0">
+         <children>
+            <Pane fx:id="paneview" prefHeight="182.0" prefWidth="230.0" />
          </children>
       </VBox>
-
+      <TableView fx:id="dasboardTable" layoutX="34.0" layoutY="225.0" maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="283.0" prefWidth="636.0">
+         <columns>
+            <TableColumn fx:id="idColumn" prefWidth="50.0" text="Id" />
+            <TableColumn fx:id="propietarioColumn" prefWidth="110.0" text="Propietario" />
+            <TableColumn fx:id="eventoColumn" prefWidth="141.0" text="Evento" />
+            <TableColumn fx:id="condominioColumn" prefWidth="132.0" text="Condominio" />
+            <TableColumn fx:id="fechahoraColumn" prefWidth="182.0" text="Fecha y Hora asistencia" />
+         </columns>
+      </TableView>
    </children>
 </AnchorPane>
