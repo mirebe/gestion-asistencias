@@ -4,6 +4,7 @@
  */
 package pe.gob.sunat.gestion.asistencias.controller;
 
+import com.mysql.cj.util.StringUtils;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.List;
@@ -36,6 +37,8 @@ import pe.gob.sunat.gestion.asistencias.service.impl.EventoServiceImpl;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+import javafx.scene.control.Alert;
 import pe.gob.sunat.gestion.asistencias.model.entities.AsistenciaEvento;
 /**
  *
@@ -132,24 +135,37 @@ public class DashboardController implements Initializable{
         }
         
     }
+   
+    private void mostrarAlertas(String header, String content, Alert.AlertType type) {
+        Alert dialogo = new Alert(type);
+        dialogo.setHeaderText(header);
+        dialogo.setContentText(content);
+        dialogo.show();
+    }    
     
     public void cambioCombo(ActionEvent event) {
         
-       
-        Long dd = (long)idcomboevento.getSelectionModel().getSelectedItem().getIdEvento();
         
-        System.out.println("combo cambio - "+dd);
-        try {
-            List<AsistenciaEvento> list = eventoService.listarAsistents(dd);
-            
-         
-            System.out.println(" capacidad "+list.get(0).getCapacidad());
-            System.out.println("cantidad " + list.get(0).getIdEvento());
-            loadData(list.get(0).getIdEvento(),list.get(0).getCapacidad());
-            
-        } catch (Exception ex) {
-            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+       
+        if (!"Seleccione".equals(idcomboevento.getValue())) {
+            Long dd = (long)idcomboevento.getSelectionModel().getSelectedItem().getIdEvento();
+
+            System.out.println("combo cambio - "+dd);
+            try {
+                List<AsistenciaEvento> list = eventoService.listarAsistents(dd);
+
+
+                System.out.println(" capacidad "+list.get(0).getCapacidad());
+                System.out.println("cantidad " + list.get(0).getIdEvento());
+                loadData(list.get(0).getIdEvento(),list.get(0).getCapacidad());
+
+            } catch (Exception ex) {
+                Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
+            } 
+        }else{
+            paneview.getChildren().clear();
         }
+
         
     } 
     
@@ -157,23 +173,48 @@ public class DashboardController implements Initializable{
         
         dasboardTable.getItems().clear();
         System.out.println("combo " + idcomboevento);
-        System.out.println("combo " + idcomboevento.getSelectionModel().getSelectedItem().getIdEvento());
+        System.out.println("combo " + idcomboevento.getValue().toString() );
 
+        if ("Seleccione".equals(idcomboevento.getValue())) {
+            
+            mostrarAlertas("Warning", "Seleccione un evento ", Alert.AlertType.WARNING);
+           return;
+        }
+        
+        
         Long opcSeleccionada = idcomboevento.getSelectionModel().getSelectedItem().getIdEvento();
+
+         System.out.println("datos " + txtbusqueda.getText());
+         System.out.println("opcSeleccionada " + opcSeleccionada);
+
+        if (!r1.isSelected() && !r2.isSelected() && !r3.isSelected() ) {
+            mostrarAlertas("Warning", "Seleccione un tipo de busqueda ", Alert.AlertType.WARNING);
+           return;
+        }
+
+
+        if (txtbusqueda.getText().isEmpty() ) {
+            mostrarAlertas("Warning", "Ingrese un criterio de busqueda", Alert.AlertType.WARNING);
+           return;
+        }
+
+         if(r1.isSelected()) { // 1
+             System.out.println("tipo busqueda nombres " );
+             llenarDatosEnTabla(1,txtbusqueda.getText(),opcSeleccionada);
+         }else if(r2.isSelected()) { // 2
+             System.out.println("tipo busqueda dni " );
+             llenarDatosEnTabla(2,txtbusqueda.getText(),opcSeleccionada);
+         }if(r3.isSelected()) { // 3
+              System.out.println("tipo busqueda id " );
+              llenarDatosEnTabla(3,txtbusqueda.getText(),opcSeleccionada);
+         }   
+
+         enlazarTabla();
         
-        System.out.println("datos " + txtbusqueda.getText());
-        if(r1.isSelected()) { // 1
-            System.out.println("tipo busqueda nombres " );
-            llenarDatosEnTabla(1,txtbusqueda.getText(),opcSeleccionada);
-        }else if(r2.isSelected()) { // 2
-            System.out.println("tipo busqueda dni " );
-            llenarDatosEnTabla(2,txtbusqueda.getText(),opcSeleccionada);
-        }if(r3.isSelected()) { // 3
-             System.out.println("tipo busqueda id " );
-             llenarDatosEnTabla(3,txtbusqueda.getText(),opcSeleccionada);
-        }   
         
-        enlazarTabla();
+        
+        
+ 
     }
     
     
@@ -181,10 +222,15 @@ public class DashboardController implements Initializable{
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         try {
-            List<EventoCombo> list = eventoService.listarEventosActivos2();
+            List<EventoCombo> list = new ArrayList<EventoCombo>();
+            list.add(new EventoCombo(0L,"Seleccione"));
+            
+            list.addAll(eventoService.listarEventosActivos2());
+            
             eventoData.addAll(list);
             idcomboevento.setItems(eventoData);
-            
+            idcomboevento.getSelectionModel().selectFirst();
+
         } catch (Exception ex) {
             Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
         }
