@@ -115,7 +115,7 @@ public class ReporteAsistenciasController implements Initializable{
         List<Propietario> listaPropietario;
         try {
             listaEvento = eventosService.listarEventosActivos();
-            listaPropietario = propietarioService.listarPropietario();
+            listaPropietario = propietarioService.ListarPropietariosActivos();
             itemsComboEvento.addAll(listaEvento);
             itemsComboPropietario.addAll(listaPropietario);
             cboEvento.setItems(itemsComboEvento);

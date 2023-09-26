@@ -28,7 +28,7 @@ public class PropietarioServiceImpl implements PropietarioService {
     
      
     @Override
-    public Propietario buscarPropietarioxDni(String dni) throws Exception {
+    public List<Propietario> ListarPropietarioxDni (String dni) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
@@ -38,10 +38,11 @@ public class PropietarioServiceImpl implements PropietarioService {
     }
     
     @Override
-    public List<Propietario> listarPropietario() throws Exception {
-        return propietarioDao.listarPropietario();
+    public List<Propietario> ListarPropietariosActivos() throws Exception {
+        return propietarioDao.ListarPropietariosActivos();
     }
-
+    
+    
     @Override
     public Map<String, Object> validarDatosPropietario(Propietario propietario, Integer[] reglas) throws Exception {
 
@@ -70,6 +71,11 @@ public class PropietarioServiceImpl implements PropietarioService {
             }
         }
         return validacion;
+    }
+
+    @Override
+    public void desactivarPropietario(Integer idPropietario) throws Exception {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

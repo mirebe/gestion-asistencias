@@ -22,6 +22,11 @@ import pe.gob.sunat.gestion.asistencias.model.entities.Propietario;
 public class PropietarioDaoImpl implements PropietarioDao{
     private final Connection cn;
     private final String Q_LISTAR_TODOS_PROPIETARIOS = "select * from propietario";
+    private final String Q_LISTAR_PROPIETARIOS_ACTIVOS = "select * from propietario where estado = 1";
+    private final String Q_LISTAR_PROPIETARIOS_X_DNI = "select * from propietario where dni = ?";
+
+    
+    
     
     public PropietarioDaoImpl(Connection cn) {
         this.cn = cn;
@@ -70,25 +75,56 @@ public class PropietarioDaoImpl implements PropietarioDao{
         return pro;
     }
 
-    @Override
-    public List <Propietario> buscarPropietarios() throws Exception {
+ @Override
+    public List<Propietario> ListarPropietariosActivos() throws Exception {
         ObservableList<Propietario> listPropietarios = FXCollections.observableArrayList();
-         System.out.println("as");
-        
-        try (PreparedStatement ps = cn.prepareStatement("select dni,concat(nombres,' ',apellidoPaterno,' ',apellidoMaterno) as nombrecompleto,dpto,correo,estado from propietario")) {
+
+        try (PreparedStatement ps = cn.prepareStatement(Q_LISTAR_PROPIETARIOS_ACTIVOS)) {
             ResultSet rs = ps.executeQuery();
             while (rs.next()) {
                 Propietario pro = new Propietario();
+                pro.setIdPropietario(rs.getLong("idPropietario"));
+                pro.setNombres(rs.getString("nombres"));
+                pro.setApellidoPaterno(rs.getString("apellidoPaterno"));
+                pro.setApellidoMaterno(rs.getString("apellidoMaterno"));
                 pro.setDni(rs.getString("dni"));
-                pro.setNombres(rs.getString("nombrecompleto"));
-                pro.setDpto(rs.getInt("dpto"));
                 pro.setCorreo(rs.getString("correo"));
+                pro.setDpto(rs.getInt("dpto"));
                 pro.setEstado(rs.getInt("estado"));
+                pro.setIdGenero(rs.getInt("idGenero"));
+                pro.setIdCondominio(rs.getInt("idCondominio"));
                 listPropietarios.add(pro);
             }
             rs.close();
         }
-              
-       return listPropietarios;
+
+        return listPropietarios;
+    }
+
+    @Override
+    public List<Propietario> ListarPropietarioxDni(String dni) throws Exception {
+        ObservableList<Propietario> listPropietarios = FXCollections.observableArrayList();
+
+        try (PreparedStatement ps = cn.prepareStatement(Q_LISTAR_PROPIETARIOS_X_DNI)) {
+            ps.setString(1, dni);
+            ResultSet rs = ps.executeQuery();
+            while (rs.next()) {
+                Propietario pro = new Propietario();
+                pro.setIdPropietario(rs.getLong("idPropietario"));
+                pro.setNombres(rs.getString("nombres"));
+                pro.setApellidoPaterno(rs.getString("apellidoPaterno"));
+                pro.setApellidoMaterno(rs.getString("apellidoMaterno"));
+                pro.setDni(rs.getString("dni"));
+                pro.setCorreo(rs.getString("correo"));
+                pro.setDpto(rs.getInt("dpto"));
+                pro.setEstado(rs.getInt("estado"));
+                pro.setIdGenero(rs.getInt("idGenero"));
+                pro.setIdCondominio(rs.getInt("idCondominio"));
+                listPropietarios.add(pro);
+            }
+            rs.close();
+        }
+
+        return listPropietarios;
     }
 }
