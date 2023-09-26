@@ -6,6 +6,7 @@ package pe.gob.sunat.gestion.asistencias.service.impl;
 
 import java.time.LocalDateTime;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import pe.gob.sunat.gestion.asistencias.model.dao.AsistenciaDao;
 import pe.gob.sunat.gestion.asistencias.model.dao.PropietarioDao;
@@ -89,4 +90,7 @@ public class AsistenciaServiceImpl implements AsistenciaService{
 	}
     }
     
+    public List<Asistencia> listarAsistencias(Long idEvento,Long idPropietario) throws Exception{
+        return asistenciaDao.listarAsistencias(idEvento, idPropietario);
+    }
 }

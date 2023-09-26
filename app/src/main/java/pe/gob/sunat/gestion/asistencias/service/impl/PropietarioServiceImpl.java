@@ -8,7 +8,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
+import pe.gob.sunat.gestion.asistencias.model.dao.PropietarioDao;
+import pe.gob.sunat.gestion.asistencias.model.dao.impl.PropietarioDaoImpl;
 import pe.gob.sunat.gestion.asistencias.model.entities.Propietario;
+import pe.gob.sunat.gestion.asistencias.model.util.Conexion;
 import pe.gob.sunat.gestion.asistencias.service.PropietarioService;
 
 /**
@@ -16,7 +19,14 @@ import pe.gob.sunat.gestion.asistencias.service.PropietarioService;
  * @author mireb
  */
 public class PropietarioServiceImpl implements PropietarioService {
+    private PropietarioDao propietarioDao;
 
+    public PropietarioServiceImpl() {
+        propietarioDao = new PropietarioDaoImpl(Conexion.getConnect());
+    }
+    
+    
+     
     @Override
     public Propietario buscarPropietarioxDni(String dni) throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
@@ -25,6 +35,11 @@ public class PropietarioServiceImpl implements PropietarioService {
     @Override
     public List<Propietario> buscarPropietarios() throws Exception {
         throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+    
+    @Override
+    public List<Propietario> listarPropietario() throws Exception {
+        return propietarioDao.listarPropietario();
     }
 
     @Override

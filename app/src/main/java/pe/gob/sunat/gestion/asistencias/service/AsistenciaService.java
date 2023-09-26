@@ -4,6 +4,7 @@
  */
 package pe.gob.sunat.gestion.asistencias.service;
 
+import java.util.List;
 import java.util.Map;
 import pe.gob.sunat.gestion.asistencias.model.entities.Asistencia;
 
@@ -14,4 +15,5 @@ import pe.gob.sunat.gestion.asistencias.model.entities.Asistencia;
 public interface AsistenciaService {
     boolean grabarAsistencia(Asistencia asistencia)  throws Exception;
     Map<String,Object> buscarPropietario(String dniProp,Integer[] reglas) throws Exception;
+    public List<Asistencia> listarAsistencias(Long idEvento,Long idPropietario) throws Exception;
 }

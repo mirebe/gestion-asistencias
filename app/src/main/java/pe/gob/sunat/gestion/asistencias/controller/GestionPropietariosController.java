@@ -166,4 +166,5 @@ public class GestionPropietariosController implements Initializable {
         }
     }
 
+
 }

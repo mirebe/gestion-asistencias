@@ -14,4 +14,5 @@ import pe.gob.sunat.gestion.asistencias.model.entities.Propietario;
 public interface PropietarioDao {
     public Propietario buscarPropietarioxDni(String dni) throws Exception;
     public List <Propietario> buscarPropietarios() throws Exception;
+    public List<Propietario> listarPropietario() throws Exception;
 }

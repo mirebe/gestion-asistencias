@@ -17,5 +17,6 @@ public interface PropietarioService {
     public Propietario buscarPropietarioxDni(String dni) throws Exception;
     public  List <Propietario> buscarPropietarios() throws Exception;
     public Map<String,Object> validarDatosPropietario(Propietario propietario,Integer[] reglas) throws Exception;
+    public List<Propietario> listarPropietario() throws Exception ;
     
 }

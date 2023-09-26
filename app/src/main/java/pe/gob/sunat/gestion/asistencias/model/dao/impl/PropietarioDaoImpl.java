@@ -8,6 +8,7 @@ package pe.gob.sunat.gestion.asistencias.model.dao.impl;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 import java.util.List;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,10 +20,26 @@ import pe.gob.sunat.gestion.asistencias.model.entities.Propietario;
  * @author mireb
  */
 public class PropietarioDaoImpl implements PropietarioDao{
- private final Connection cn;
-   
+    private final Connection cn;
+    private final String Q_LISTAR_TODOS_PROPIETARIOS = "select * from propietario";
+    
     public PropietarioDaoImpl(Connection cn) {
         this.cn = cn;
+    }
+    
+    @Override
+    public List<Propietario> listarPropietario() throws Exception {
+        List<Propietario> lista = new ArrayList<>();
+        PreparedStatement ps = cn.prepareStatement(Q_LISTAR_TODOS_PROPIETARIOS);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            lista.add(new Propietario(rs.getLong("idPropietario"), rs.getString("nombres"),
+                    rs.getString("apellidoPaterno"), rs.getString("apellidoMaterno"),
+                    rs.getString("correo"), rs.getString("dni"),rs.getInt("dpto")));
+        }
+        rs.close();
+        ps.close();
+        return lista;
     }
     
     @Override
@@ -36,7 +53,7 @@ public class PropietarioDaoImpl implements PropietarioDao{
         ResultSet rs = ps.executeQuery();
         while (rs.next()) {
             pro = new Propietario();
-            pro.setIdPropietario(rs.getInt("idPropietario"));
+            pro.setIdPropietario(rs.getLong("idPropietario"));
             pro.setNombres(rs.getString("nombres"));
             pro.setApellidoPaterno(rs.getString("apellidoPaterno"));
             pro.setApellidoMaterno(rs.getString("apellidoMaterno"));

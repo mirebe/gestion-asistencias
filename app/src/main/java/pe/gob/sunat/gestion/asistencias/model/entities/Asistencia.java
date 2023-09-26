@@ -17,6 +17,9 @@ public class Asistencia {
     LocalDateTime fechaHoraAsistencia;
     Double montoMulta;
     String estado;
+    
+    private Propietario propietario;
+    private Evento evento;
 
     public Asistencia(Long idAsistencia, Long idPropietario, Long idEvento, LocalDateTime fechaHoraAsistencia, Double montoMulta, String estado) {
         this.idAsistencia = idAsistencia;
@@ -28,6 +31,8 @@ public class Asistencia {
     }
 
     public Asistencia() {
+        propietario = new Propietario();
+        evento = new Evento();
     }
 
     public Long getIdAsistencia() {
@@ -78,6 +83,22 @@ public class Asistencia {
         this.estado = estado;
     }
 
-   
+    public Propietario getPropietario() {
+        return propietario;
+    }
+
+    public void setPropietario(Propietario propietario) {
+        this.propietario = propietario;
+    }
+
+    public Evento getEvento() {
+        return evento;
+    }
+
+    public void setEvento(Evento evento) {
+        this.evento = evento;
+    }
+
+    
     
 }

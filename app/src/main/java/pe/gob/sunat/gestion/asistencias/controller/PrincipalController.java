@@ -80,7 +80,7 @@ public class PrincipalController {
     private void onClickVistaReporteAsistencia(){
         System.out.println("onClickVistaReporteAsistencia()");
         try {
-            FXMLArchivo<GestionPropietariosController> fxRepAsistencia = new FXMLArchivo<>("VistaReporteAsistencia");
+            FXMLArchivo<ReporteAsistenciasController> fxRepAsistencia = new FXMLArchivo<>("VistaReporteAsistencia");
             extenderPanel(fxRepAsistencia.getRoot());
             panelContenido.getChildren().clear();
             panelContenido.getChildren().add(fxRepAsistencia.getRoot());

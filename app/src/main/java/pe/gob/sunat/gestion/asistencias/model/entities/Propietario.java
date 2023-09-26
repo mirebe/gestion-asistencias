@@ -10,7 +10,7 @@ package pe.gob.sunat.gestion.asistencias.model.entities;
  */
 public class Propietario {
     
-    private Integer idPropietario;
+    private Long idPropietario;
     private Integer idCondominio;
     private String nombres;
     private String apellidoPaterno;
@@ -24,7 +24,19 @@ public class Propietario {
     public Propietario() {
     }
 
-    public Propietario(Integer idPropietario, Integer idCondominio, String nombres, String apellidoPaterno, String apellidoMaterno, Integer idGenero, String correo, String dni, Integer dpto, Integer estado) {
+    public Propietario(Long idPropietario, String nombres, String apellidoPaterno, String apellidoMaterno, String correo, String dni, Integer dpto) {
+        this.idPropietario = idPropietario;
+        this.nombres = nombres;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.correo = correo;
+        this.dni = dni;
+        this.dpto = dpto;
+    }
+    
+    
+
+    public Propietario(Long idPropietario, Integer idCondominio, String nombres, String apellidoPaterno, String apellidoMaterno, Integer idGenero, String correo, String dni, Integer dpto, Integer estado) {
         this.idPropietario = idPropietario;
         this.idCondominio = idCondominio;
         this.nombres = nombres;
@@ -40,15 +52,15 @@ public class Propietario {
     public String getNombresCompleto(){
         return ("" + this.apellidoPaterno + " " +this.apellidoMaterno + " " + this.getNombres()).trim();
     }
-    
-    public Integer getIdPropietario() {
+
+    public Long getIdPropietario() {
         return idPropietario;
     }
 
-    public void setIdPropietario(Integer idPropietario) {
+    public void setIdPropietario(Long idPropietario) {
         this.idPropietario = idPropietario;
     }
-
+    
     public Integer getIdCondominio() {
         return idCondominio;
     }
@@ -119,6 +131,11 @@ public class Propietario {
 
     public void setEstado(Integer estado) {
         this.estado = estado;
+    }
+
+    @Override
+    public String toString() {
+        return this.apellidoPaterno + " " +this.apellidoMaterno + " " + this.getNombres(); 
     }
     
     
