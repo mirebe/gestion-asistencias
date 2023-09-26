@@ -19,4 +19,8 @@ public interface PropietarioService {
     public Map<String,Object> validarDatosPropietario(Propietario propietario,Integer[] reglas) throws Exception;
     public List<Propietario> listarPropietario() throws Exception ;
     
+    List<Propietario> listarPropietarioxNombre(String nombre) throws Exception;
+    void desactivar(Long idPropietario) throws Exception;
+    void actualizar(Propietario propietario) throws Exception;
+    void guardar(Propietario propietario) throws Exception;
 }

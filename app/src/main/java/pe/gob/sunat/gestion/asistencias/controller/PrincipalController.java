@@ -54,7 +54,7 @@ public class PrincipalController {
     private void onClickVistaEventos(){
         System.out.println("onClickVistaEventos()");
         try {
-            FXMLArchivo<GestionEventosController> fxEventos = new FXMLArchivo<>("VistaGestionEventos_1");
+            FXMLArchivo<GestionEventosController> fxEventos = new FXMLArchivo<>("VistaGestionEventos");
             extenderPanel(fxEventos.getRoot());
             panelContenido.getChildren().clear();
             panelContenido.getChildren().add(fxEventos.getRoot());
@@ -102,6 +102,7 @@ public class PrincipalController {
         this.stageVentanaPrincipal = stageVentanaPrincipal;
         this.usuario = usuario;
         lblUsuario.setText("Bienvenido: "+usuario.getNombres());
+        onClickVistaDashBoard();
     }
     
 }

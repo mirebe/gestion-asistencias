@@ -24,7 +24,7 @@ public class Propietario {
     public Propietario() {
     }
 
-    public Propietario(Long idPropietario, String nombres, String apellidoPaterno, String apellidoMaterno, String correo, String dni, Integer dpto) {
+    public Propietario(Long idPropietario, String nombres, String apellidoPaterno, String apellidoMaterno, String correo, String dni, Integer dpto,Integer idGenero) {
         this.idPropietario = idPropietario;
         this.nombres = nombres;
         this.apellidoPaterno = apellidoPaterno;
@@ -32,6 +32,7 @@ public class Propietario {
         this.correo = correo;
         this.dni = dni;
         this.dpto = dpto;
+        this.idGenero = idGenero;
     }
     
     

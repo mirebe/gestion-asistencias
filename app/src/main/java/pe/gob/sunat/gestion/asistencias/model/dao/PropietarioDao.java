@@ -15,4 +15,9 @@ public interface PropietarioDao {
     public Propietario buscarPropietarioxDni(String dni) throws Exception;
     public List <Propietario> buscarPropietarios() throws Exception;
     public List<Propietario> listarPropietario() throws Exception;
+    List<Propietario> listarPropietarioxNombre(String nombre) throws Exception;
+    
+    void desactivar(Long idPropietario) throws Exception;
+    void actualizar(Propietario propietario) throws Exception;
+    void guardar(Propietario propietario) throws Exception;
 }

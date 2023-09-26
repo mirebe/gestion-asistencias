@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;  
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -55,167 +54,31 @@ public class DashboardController implements Initializable{
     private final EventoService eventoService;
     
     private ObservableList<EventoCombo> eventoData = FXCollections.observableArrayList();
-    
-    @FXML
-    TextField txtbusqueda;    
-     
-     @FXML
-    RadioButton  r1;  
-      @FXML
-    RadioButton  r2;     
-      @FXML
-    RadioButton  r3;
-      
-     @FXML
-    private TableView<EventoDashboard> dasboardTable;
-  
-    @FXML
-    private TableColumn<EventoDashboard, Long> idColumn;
-
-    @FXML
-    private TableColumn<EventoDashboard, String> propietarioColumn;
-
-    @FXML
-    private TableColumn<EventoDashboard, String> eventoColumn;
-
-    @FXML
-    private TableColumn<EventoDashboard, String> condominioColumn;
-
-    @FXML
-    private TableColumn<EventoDashboard, LocalDateTime> fechahoraColumn;
-      
-    private ObservableList<EventoDashboard> eventoData2 = FXCollections.observableArrayList();
-    
-    private final DateTimeFormatter dtff = DateTimeFormatter.ofPattern("HH:mm");
-
+   
     public DashboardController() {
         System.out.println("DashboardController.<constructor>()");
         eventoService = new EventoServiceImpl();
     }    
     
-    private void llenarDatosEnTabla(int tipoC, String txtbusqueda, Long idEvento) {
-        try {
-            List<EventoDashboard> list = eventoService.listarEventoDashboard(tipoC,txtbusqueda,idEvento);
-            eventoData2.addAll(list);
-        } catch (Exception e) {
-            System.out.println("Error llenarDatosEnTabla =" + e.getMessage());
-            e.printStackTrace();
-        }
-    }
-    
-
-    
-    private void enlazarTabla() {
-        dasboardTable.setItems(eventoData2);
-  //      txtNombreEvento.textProperty().bindBidirectional(eventoActual.getDescripcion1());
-  //      datePikerFechaEvento.valueProperty().bindBidirectional(eventoActual.getFechaEvento1());
-//        String horaMinutoData = dtf.format(eventoActual.getHoraEvento());
-//        comboHora.valueProperty().bindBidirectional(new SimpleObjectProperty(obtenerHora(horaMinutoData)));
-//        comboMinuto.valueProperty().bindBidirectional(new SimpleObjectProperty(obtenerMinuto(horaMinutoData)));
-//        comboSiglas.valueProperty().bindBidirectional(new SimpleObjectProperty(obtenerMarcador(horaMinutoData)));
-
-
-        idColumn.setCellValueFactory(rowData -> rowData.getValue().getIdEvento());
-        propietarioColumn.setCellValueFactory(rowData -> rowData.getValue().getNombres());
-        eventoColumn.setCellValueFactory(rowData -> rowData.getValue().getDescripcion());
-        fechahoraColumn.setCellValueFactory(rowData ->  rowData.getValue().getFechahora());
-        condominioColumn.setCellValueFactory(rowData ->  rowData.getValue().getNombreCondominio());
-        //estadoColumn.setCellValueFactory(rowData -> new SimpleStringProperty(EstadoEnum.getStringValueFromInt(rowData.getValue().getEstado())));
-    }
-    
-    
-    public void onCambio(ActionEvent event) {
-        
-        if(r1.isSelected()) {
-            txtbusqueda.setPromptText("Ingrese apellidos y nombres del propietario");
-        }else if(r2.isSelected()) {
-            txtbusqueda.setPromptText("Ingrese DNI del propietario");
-        }if(r3.isSelected()) {
-             txtbusqueda.setPromptText("Ingrese ID del propietario");
-        }
-        
-    }
-   
-    private void mostrarAlertas(String header, String content, Alert.AlertType type) {
-        Alert dialogo = new Alert(type);
-        dialogo.setHeaderText(header);
-        dialogo.setContentText(content);
-        dialogo.show();
-    }    
-    
-    public void cambioCombo(ActionEvent event) {
-        
-        Long dd = (long)idcomboevento.getSelectionModel().getSelectedItem().getIdEvento();
-       
+    @FXML
+    private void cambioCombo() {        
+        Long dd = (long)idcomboevento.getSelectionModel().getSelectedItem().getIdEvento();     
         if (dd != 0) {
-            
-
             System.out.println("combo cambio - "+dd);
             try {
                 List<AsistenciaEvento> list = eventoService.listarAsistents(dd);
-
-
                 System.out.println(" capacidad "+list.get(0).getCapacidad());
                 System.out.println("cantidad " + list.get(0).getIdEvento());
                 loadData(list.get(0).getIdEvento(),list.get(0).getCapacidad());
-
             } catch (Exception ex) {
                 Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
             } 
         }else{
             paneview.getChildren().clear();
-        }
-
-        
+        }      
     } 
     
-    public void BotonConsultar(){
-        
-        dasboardTable.getItems().clear();
-        System.out.println("combo " + idcomboevento);
-        System.out.println("combo " + idcomboevento.getValue().toString() );
-
-        if ("Seleccione".equals(idcomboevento.getValue())) {
-            
-            mostrarAlertas("Warning", "Seleccione un evento ", Alert.AlertType.WARNING);
-           return;
-        }
-        
-        
-        Long opcSeleccionada = idcomboevento.getSelectionModel().getSelectedItem().getIdEvento();
-
-         System.out.println("datos " + txtbusqueda.getText());
-         System.out.println("opcSeleccionada " + opcSeleccionada);
-
-        if (!r1.isSelected() && !r2.isSelected() && !r3.isSelected() ) {
-            mostrarAlertas("Warning", "Seleccione un tipo de busqueda ", Alert.AlertType.WARNING);
-           return;
-        }
-
-
-        if (txtbusqueda.getText().isEmpty() ) {
-            mostrarAlertas("Warning", "Ingrese un criterio de busqueda", Alert.AlertType.WARNING);
-           return;
-        }
-
-         if(r1.isSelected()) { // 1
-             System.out.println("tipo busqueda nombres " );
-             llenarDatosEnTabla(1,txtbusqueda.getText(),opcSeleccionada);
-         }else if(r2.isSelected()) { // 2
-             System.out.println("tipo busqueda dni " );
-             llenarDatosEnTabla(2,txtbusqueda.getText(),opcSeleccionada);
-         }if(r3.isSelected()) { // 3
-              System.out.println("tipo busqueda id " );
-              llenarDatosEnTabla(3,txtbusqueda.getText(),opcSeleccionada);
-         }   
-
-         enlazarTabla();
-        
-        
-        
-        
- 
-    }
+    
     
     
     
@@ -223,38 +86,38 @@ public class DashboardController implements Initializable{
     public void initialize(URL url, ResourceBundle rb) {
         try {
             List<EventoCombo> list = new ArrayList<EventoCombo>();
-            list.add(new EventoCombo(0L,"Seleccione"));
+            
+            //list.add(new EventoCombo(0L,"Seleccione"));
             
             list.addAll(eventoService.listarEventosActivos2());
-            
-            eventoData.addAll(list);
-            idcomboevento.setItems(eventoData);
-            idcomboevento.getSelectionModel().selectFirst();
+            if(list.size()>0){
+                 eventoData.addAll(list);
+                idcomboevento.setItems(eventoData);
+                idcomboevento.getSelectionModel().selectFirst();
+                cambioCombo();
+            }
+           
 
         } catch (Exception ex) {
-            Logger.getLogger(DashboardController.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-
-        
+            Logger.getLogger(DashboardController1.class.getName()).log(Level.SEVERE, null, ex);
+        }  
     }
     
     
     
     private void loadData(long cantidad ,Long capacidad) {
         paneview.getChildren().clear();
-        
         Long noAsistente = capacidad - cantidad;
-            System.out.println(" noAsistente "+noAsistente);
+        System.out.println(" noAsistente "+noAsistente);
      
-      ObservableList<PieChart.Data> list = FXCollections.observableArrayList();
-         list.add(new PieChart.Data("ASISTENTES : "+ cantidad, cantidad));
-         list.add(new PieChart.Data("NO ASISTIERON : " + noAsistente, noAsistente));
+        ObservableList<PieChart.Data> list = FXCollections.observableArrayList();
+        list.add(new PieChart.Data("ASISTENTES : "+ cantidad, cantidad));
+        list.add(new PieChart.Data("NO ASISTIERON : " + noAsistente, noAsistente));
  
-         PieChart listArr = new PieChart(list);
-         listArr.setTitle("ASISTENTES");
+        PieChart listArr = new PieChart(list);
+        listArr.setTitle("ASISTENTES");
          
-         paneview.getChildren().add(listArr);
+        paneview.getChildren().add(listArr);
     }
        
      

@@ -71,5 +71,24 @@ public class PropietarioServiceImpl implements PropietarioService {
         }
         return validacion;
     }
-
+    
+    @Override
+    public List<Propietario> listarPropietarioxNombre(String nombre) throws Exception{
+        return propietarioDao.listarPropietarioxNombre(nombre);
+    }
+    
+    @Override
+    public void desactivar(Long idPropietario) throws Exception{
+        propietarioDao.desactivar(idPropietario);
+    }
+    
+    @Override
+    public void actualizar(Propietario propietario) throws Exception{
+        propietarioDao.actualizar(propietario);
+    }
+    
+    @Override
+    public void guardar(Propietario propietario) throws Exception{
+        propietarioDao.guardar(propietario);
+    }
 }
