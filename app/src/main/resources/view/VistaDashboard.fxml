@@ -10,12 +10,13 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pe.gob.sunat.gestion.asistencias.controller.DashboardController">
+<AnchorPane id="AnchorPane" prefHeight="674.0" prefWidth="984.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="pe.gob.sunat.gestion.asistencias.controller.DashboardController">
    <children>
       <VBox alignment="BOTTOM_RIGHT" layoutX="332.0" layoutY="210.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="200.0" prefWidth="229.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
          <children>
             <Pane fx:id="paneview" prefHeight="182.0" prefWidth="230.0" VBox.vgrow="ALWAYS" />
          </children>
       </VBox>
+
    </children>
 </AnchorPane>
