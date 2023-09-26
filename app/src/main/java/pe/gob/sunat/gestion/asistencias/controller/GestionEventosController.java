@@ -147,11 +147,11 @@ public class GestionEventosController implements Initializable {
                     } else {
                         FontAwesomeIcon fntIconDel = new FontAwesomeIcon();
                         fntIconDel.setIconName("CLOSE");
-                        fntIconDel.setSize("2.0em");
+                        fntIconDel.setSize("1.8em");
                                 
                         FontAwesomeIcon fntIconEdit = new FontAwesomeIcon();
                         fntIconEdit.setIconName("EDIT");
-                        fntIconEdit.setSize("2.0em");
+                        fntIconEdit.setSize("1.8em");
                         
                         Label deleteIcon = new Label("");
                         Label editIcon = new Label("");
