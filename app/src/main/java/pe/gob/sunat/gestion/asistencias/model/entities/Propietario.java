@@ -35,7 +35,17 @@ public class Propietario {
         this.idGenero = idGenero;
     }
     
-    
+    public Propietario(Long idPropietario, String nombres, String apellidoPaterno, String apellidoMaterno, String correo, String dni, Integer dpto,Integer idGenero,Integer estado) {
+        this.idPropietario = idPropietario;
+        this.nombres = nombres;
+        this.apellidoPaterno = apellidoPaterno;
+        this.apellidoMaterno = apellidoMaterno;
+        this.correo = correo;
+        this.dni = dni;
+        this.dpto = dpto;
+        this.idGenero = idGenero;
+        this.estado = estado;
+    }
 
     public Propietario(Long idPropietario, Integer idCondominio, String nombres, String apellidoPaterno, String apellidoMaterno, Integer idGenero, String correo, String dni, Integer dpto, Integer estado) {
         this.idPropietario = idPropietario;

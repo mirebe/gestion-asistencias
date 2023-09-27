@@ -21,14 +21,14 @@ import pe.gob.sunat.gestion.asistencias.model.entities.Propietario;
  */
 public class PropietarioDaoImpl implements PropietarioDao{
     private final Connection cn;
-    private final String Q_LISTAR_TODOS_PROPIETARIOS = "select * from propietario where estado=1";
+    private final String Q_LISTAR_TODOS_PROPIETARIOS = "select * from propietario";
     private final String Q_REGISTRAR_ACTIVOS = "Insert into propietario(idCondominio, nombres, apellidoPaterno, apellidoMaterno, idGenero,correo,estado,dni,dpto) VALUES(?,?,?,?,?,?,?,?,?)";
     private final String Q_UPDATE = "UPDATE propietario SET\n" +
 " nombres = ?, apellidoPaterno = ?, apellidoMaterno = ?, idGenero = ?,\n" +
 " correo = ?, estado = ?, dni = ?, dpto = ? WHERE idPropietario = ?;";
     private final String Q_DESACTIVAR = "update propietario set estado=0 where idPropietario=?";
      private final String Q_LISTAR_X_NOMBRES = "select * from propietario where concat(apellidoMaterno , apellidoMaterno , nombres)  like ?";
-    
+    private final String Q_CONTAR_TODOS_PROPIETARIOS = "select count(*) as cantidad from propietario where estado=1";
     public PropietarioDaoImpl(Connection cn) {
         this.cn = cn;
     }
@@ -41,11 +41,25 @@ public class PropietarioDaoImpl implements PropietarioDao{
         while (rs.next()) {
             lista.add(new Propietario(rs.getLong("idPropietario"), rs.getString("nombres"),
                     rs.getString("apellidoPaterno"), rs.getString("apellidoMaterno"),
-                    rs.getString("correo"), rs.getString("dni"),rs.getInt("dpto"),rs.getInt("idGenero")));
+                    rs.getString("correo"), rs.getString("dni"),rs.getInt("dpto"),
+                    rs.getInt("idGenero"),rs.getInt("estado")));
         }
         rs.close();
         ps.close();
         return lista;
+    }
+    
+    @Override
+    public int contarPropietarios() throws Exception {
+        int numeroPropietarios=0;
+        PreparedStatement ps = cn.prepareStatement(Q_CONTAR_TODOS_PROPIETARIOS);
+        ResultSet rs = ps.executeQuery();
+        while (rs.next()) {
+            System.out.println("rs.getInt(\"cantidad\");=="+rs.getInt("cantidad"));
+            numeroPropietarios=rs.getInt("cantidad");
+        }
+        rs.close();
+        return numeroPropietarios;
     }
     
     @Override

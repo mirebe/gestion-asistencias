@@ -37,6 +37,11 @@ public class EventoServiceImpl implements EventoService {
     public void guardarEvento(Evento evento) throws Exception {
         eventoDao.guardarEvento(evento);
     }
+    
+    @Override
+    public void guardarEvento(Evento evento, int cantidadPropietarios) throws Exception {
+        eventoDao.guardarEvento(evento,cantidadPropietarios);
+    }
 
     @Override
     public List<Evento> listarEvento() throws Exception {

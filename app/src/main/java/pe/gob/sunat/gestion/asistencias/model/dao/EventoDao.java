@@ -16,6 +16,8 @@ public interface EventoDao {
     public List<Evento> listarEventosActivos() throws Exception;
 
     void guardarEvento(Evento evento) throws Exception;
+    
+    void guardarEvento(Evento evento, int cantidadPropietarios) throws Exception;
 
     List<Evento> listarEvento() throws Exception;
     

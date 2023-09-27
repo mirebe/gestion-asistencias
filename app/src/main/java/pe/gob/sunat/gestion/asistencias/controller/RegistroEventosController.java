@@ -23,7 +23,9 @@ import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.AnchorPane;
 import pe.gob.sunat.gestion.asistencias.model.entities.Evento;
 import pe.gob.sunat.gestion.asistencias.service.EventoService;
+import pe.gob.sunat.gestion.asistencias.service.PropietarioService;
 import pe.gob.sunat.gestion.asistencias.service.impl.EventoServiceImpl;
+import pe.gob.sunat.gestion.asistencias.service.impl.PropietarioServiceImpl;
 import pe.gob.sunat.gestion.asistencias.util.FormularioUtil;
 
 /**
@@ -35,9 +37,11 @@ public class RegistroEventosController implements Initializable{
     private GestionEventosController gestionEventosController;
     private Evento evento;
     private EventoService eventoService;
+    private PropietarioService propietarioService;
 
     public RegistroEventosController() {
         eventoService = new EventoServiceImpl();
+        propietarioService = new PropietarioServiceImpl();
     }
 
     @FXML
@@ -108,11 +112,13 @@ public class RegistroEventosController implements Initializable{
         LocalDateTime local = LocalDateTime.of(evento.getFechaEvento(), LocalTime.from(timeFormatter.parse(hora)));
         evento.setHoraEvento(local);
          ///////////////////////
-         
+        evento.setAnioEvento(evento.getFechaEvento().getYear());
         try {
+            int cantidadPropietarios=propietarioService.contarPropietario();
+            System.out.println("cantidadPropietarios=="+cantidadPropietarios);
             evento.setEstado(1);
             if(tipoOperacion.equals("INS") ){
-                eventoService.guardarEvento(evento);
+                eventoService.guardarEvento(evento,cantidadPropietarios);
                 mostrarAlertas("Informacion", "Se agrego un nuevo evento exitosamente", Alert.AlertType.INFORMATION);
             }else{
                 eventoService.actualizarEvento(evento);

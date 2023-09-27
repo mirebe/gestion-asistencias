@@ -105,8 +105,9 @@
                               <TableColumn fx:id="idColumn" text="Id" />
                               <TableColumn fx:id="dniColumn" prefWidth="115.0" text="DNI" />
                               <TableColumn fx:id="nombreColumn" minWidth="100.0" prefWidth="297.0" text="Nombre " />
-                              <TableColumn fx:id="dptoColumn" prefWidth="121.0" text="Dpto" />
-                              <TableColumn fx:id="editCol" prefWidth="154.0" text="Opciones" />
+                              <TableColumn fx:id="dptoColumn" prefWidth="100.0" text="Dpto" />
+                              <TableColumn fx:id="estadoColumn" prefWidth="100.0" text="Estado" />
+                              <TableColumn fx:id="editCol" prefWidth="100.0" text="Opciones" />
                            </columns>
                         </TableView>
                      </children>

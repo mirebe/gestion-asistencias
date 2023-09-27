@@ -41,6 +41,11 @@ public class PropietarioServiceImpl implements PropietarioService {
     public List<Propietario> listarPropietario() throws Exception {
         return propietarioDao.listarPropietario();
     }
+    
+    @Override
+    public int contarPropietario() throws Exception {
+        return propietarioDao.contarPropietarios();
+    }
 
     @Override
     public Map<String, Object> validarDatosPropietario(Propietario propietario, Integer[] reglas) throws Exception {

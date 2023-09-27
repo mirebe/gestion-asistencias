@@ -6,6 +6,8 @@ package pe.gob.sunat.gestion.asistencias.controller;
 
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Alert;
@@ -75,10 +77,20 @@ public class RegistroPropietariosController implements Initializable{
             return;
         }
         if(!rbMasculino.isSelected() && !rbFemenino.isSelected() ){
-            mostrarAlertas("Warning", "Sleccione su Sexo.", Alert.AlertType.WARNING);
+            mostrarAlertas("Warning", "Seleccione su Sexo.", Alert.AlertType.WARNING);
             return;
         }
-        
+        if(txtCorreo.getText().length()!=0){
+            Pattern pattern = Pattern.compile("^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+						+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$");
+            Matcher mather = pattern.matcher(txtCorreo.getText());
+            if (!mather.find()) {
+               mostrarAlertas("Warning", "Ingrese un Correo Valido", Alert.AlertType.WARNING);
+               return;
+            }
+        }else{
+        txtCorreo.setText("");
+        }
         Propietario pro = new Propietario();
         pro.setApellidoMaterno(txtMaterno.getText());
         pro.setApellidoPaterno(txtPaterno.getText());

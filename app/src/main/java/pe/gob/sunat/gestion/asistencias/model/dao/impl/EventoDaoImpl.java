@@ -26,6 +26,7 @@ public class EventoDaoImpl implements EventoDao {
 
     private final String Q_LISTAR_EVENTOS_ACTIVOS = "select * from evento where estado = 1";
     private final String Q_REGISTRAR_EVENTOS_ACTIVOS = "Insert into Evento(descripcion, fechaEvento, horaEvento, estado, anioEvento) VALUES(?,?,?,?,?)";
+    private final String Q_REGISTRAR_EVENTOS_ACTIVOS_CNT = "Insert into Evento(descripcion, fechaEvento, horaEvento, estado, anioEvento, capacidad) VALUES(?,?,?,?,?,?)";
     private final String Q_LISTAR_TODOS_EVENTOS = "select * from evento";
     private final String Q_LISTAR_X_NOMNRES_EVENTOS = "select * from evento where descripcion like ?";
     private final String Q_BUSCAR_EVENTOS_IDEVENTO = "select * from evento where idEvento=?";
@@ -185,6 +186,20 @@ public class EventoDaoImpl implements EventoDao {
         pstmt.setTimestamp(3, java.sql.Timestamp.valueOf(evento.getHoraEvento()));
         pstmt.setInt(4, evento.getEstado());
         pstmt.setInt(5, evento.getAnioEvento());
+        pstmt.executeUpdate();
+
+        pstmt.close();
+    }
+    
+        @Override
+    public void guardarEvento(Evento evento, int cantidadpropietarios) throws Exception {
+        PreparedStatement pstmt = cn.prepareStatement(Q_REGISTRAR_EVENTOS_ACTIVOS_CNT);
+        pstmt.setString(1, evento.getDescripcion());
+        pstmt.setDate(2, java.sql.Date.valueOf(evento.getFechaEvento()));
+        pstmt.setTimestamp(3, java.sql.Timestamp.valueOf(evento.getHoraEvento()));
+        pstmt.setInt(4, evento.getEstado());
+        pstmt.setInt(5, evento.getAnioEvento());
+        pstmt.setInt(6, cantidadpropietarios);
         pstmt.executeUpdate();
 
         pstmt.close();

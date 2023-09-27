@@ -51,7 +51,7 @@ public class GestionPropietariosController implements Initializable {
     private TableView<Propietario> tablaGestionPropietarios;
 
     @FXML
-    private TableColumn<Propietario, String> idColumn,dniColumn, nombreColumn, dptoColumn,  editCol;
+    private TableColumn<Propietario, String> idColumn,dniColumn, nombreColumn, dptoColumn, estadoColumn,  editCol;
      
      private ObservableList<Propietario> propietarioData = FXCollections.observableArrayList();
     
@@ -117,6 +117,16 @@ public class GestionPropietariosController implements Initializable {
         dniColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getDni()));
         nombreColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getNombresCompleto()));
         dptoColumn.setCellValueFactory(cellData -> new SimpleObjectProperty<>(cellData.getValue().getDpto().toString()));
+        estadoColumn.setCellValueFactory(cellData -> {
+            String res = "ACTIVO";
+            System.out.println("estadooooooo======0"+cellData.getValue().getEstado());
+            if(cellData.getValue().getEstado()==0){
+                res = "BAJA";
+            }
+            return new SimpleObjectProperty<>(res);
+        });
+        dptoColumn.setStyle( "-fx-alignment: CENTER;");
+        estadoColumn.setStyle( "-fx-alignment: CENTER;");
         
         
          //add cell of button edit 
